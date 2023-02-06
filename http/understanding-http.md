@@ -6,21 +6,19 @@
 * OSI 7계층(OSI 7-Layer)
   * 물리/데이터링크/네트워크/전송/세션/표현/응용 계층으로 구분함. 여기서는 데이터링크/네트워크/전송/응용 계층만 정리.
   * 데이터링크 계층: 소프트웨어 측면에서 하드웨어를 추상화하여 구분할 수 있는 계층. 이를 위해 하드웨어에서 제공하는 MAC Address로 구분함. 원격에서는 인지 불가능.
-  * 네트워크 계층: 인터넷을 이용하여 서로 떨어진 대상을 구분할 수 있는 계층. 이를 위해 IP Address를 할당하여 구분함. 고정 IP를 지정하여 이용하거나 DHCP를 이용할 수 있음.
+  * 네트워크 계층: 인터넷을 이용하여 서로 떨어진 대상을 구분할 수 있는 계층. 이를 위해 IP Address를 할당하여 구분함.
   * 전송 계층: 하나 혹은 복수의 하드웨어에서 프로그램 간 데이터통신을 위한 계층. 이를 위해 TCP/UDP와 Port Number를 통해 구분함.
   * 응용 계층: 응용프로그램을 이용하여 통신을 위한 인터페이스를 제공하는 계층. 대표적으로 웹 브라우징을 할 때 쓰는 HTTP/HTTPS가 있음.
 
 * HTTP와 HTTPS의 차이
   * HTTPS의 경우, 보안을 위해 TLS 프로토콜을 한번 거쳐서 HTTP 프로토콜을 이용하여 통신할 수 있도록 함.
 
-<figure><img src="./images/http-layers.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="./images/http-layers.png" alt=""></figure>
 
 * 클라이언트-서버 모델
   * 클라이언트(Client): 임의의 프로세스를 요청하는 서비스 이용자.
   * 서버(Server): 요청한 프로세스를 처리하여 응답하는 서비스 제공자.
-    * 서버는 어떠한 서비스를 제공해야하는지 명확하게 정의해야 하며, 클라이언트는 서버가 제공한 서비스를 이용하기 위해 리소스를 명확하게 요청해야 함. -> 아래와 같이 URL(Uniform Resource Locator)을 가지고 클라이언트-서버 간 통신 수행.
-      * <pre class="language-ini"><code class="lang-ini"><strong>scheme://host:port/path?query#fragment
-        </strong></code></pre>
+    * 서버는 어떠한 서비스를 제공해야하는지 명확하게 정의해야 하며, 클라이언트는 서버가 제공한 서비스를 이용하기 위해 리소스를 명확하게 요청해야 함. URL(Uniform Resource Locator)을 가지고 클라이언트-서버 간 통신 수행.
 
 * 무상태(Stateless)/상태(Stateful) 프로토콜
   * 무상태(Stateless) 프로토콜: 각각의 요청이 종속되지 않고 독립적으로 움직이는 프로토콜.
@@ -33,7 +31,7 @@
 
 * HTTP 메시지 구조
 
-<figure><img src="./images/httpmsgstructure2.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="./images/httpmsgstructure2.png" alt=""></figure>
 
 * 기본적으로는 사람이 인지할 수 있는 형태로 짜여있음.
 * 시작 줄(Start Line) - 헤더(Headers) - 빈 줄(Empty Line) - 본문(Body) 형태로 구성됨.

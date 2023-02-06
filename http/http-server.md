@@ -9,7 +9,7 @@
     * 제어권이 그대로 유지되므로, 기존에 수행된 작업 주체에서 다른 작업 수행 가능.
   * 비효율성을 막기 위해 Callback, Listener 등등을 이용한 비동기 프로그래밍과 이벤트 기반 프로그래밍이 필요함.
 
-<figure><img src="./images/blocking-non-blocking.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="./images/blocking-non-blocking.png" alt=""></figure>
 
 * 참고 링크
   * https://homoefficio.github.io/2017/02/19/Blocking-NonBlocking-Synchronous-Asynchronous/
