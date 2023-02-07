@@ -36,13 +36,15 @@
   * 프로세스 간 통신에 사용되는 인터넷 소켓, 유닉스 도메인 소켓을 위한 API.
 
 * Java에서의 소켓 활용
-  * 스트림(Stream)을 이용하여 프로세스 간 통신 수행.
-  * InputStream: 파일 내용을 읽을 때 활용.
-  * OutputStream: 임의의 내용을 파일에 기록할 때 활용.
+  * 데이터가 전송되는 통로라 할 수 있는 스트림(Stream)을 이용하여 프로세스 간 통신 수행.
+    * InputStream/OutputStream: 데이터를 바이트 단위로 읽어들이고 기록할 때 활용.
+    * Reader/Writer: 데이터를 문자열 단위로 읽어들이고 기록할 때 활용.
+      * InputStreamReader: 바이트 단위 데이터를 문자 단위로 변환하여 읽을 때 사용.
+      * OutputStreamWriter: 문자 단위의 데이터를 바이트 단위로 변환하여 기록할 때 사용.
 
 * URI, URL, URN
   * URI(Uniform Resource Identifier, 통합 자원 식별자): 인터넷의 자원을 식별할 수 있는 문자열을 의미함. 하위 개념으로 URL, URN이 있음.
-    * URL(Uniform Resource Locator): 네트워크 상에서 웹 페이지, 이미지, 동영상 등의 파일이 위치한 정보를 나타냄.
+    * URL(Uniform Resource Locator): 네트워크 상에서 웹 페이지, 이미지, 동영상 등의 파일이 위치한 경로(Path)를 나타냄.
     * URN(Uniform Resource Name): URI의 표준 포맷 중 하나로, 이름으로 리소스를 특정함.
   * 이름만으로는 리소스에 대한 접근이 어렵기 때문에, 요즘에는 URN을 거의 사용하지 않는다.
   * 이에 따라 URL을 URI라 통칭하기도 하지만, 엄밀히 따지면 차이가 있다.
@@ -79,15 +81,16 @@
   
 * 포트(Port)
   * IP 내에서 프로세스 간 통신 구분을 위해 사용하는 번호. 0부터 65535(2^32 - 1)까지 할당 가능함.
-  * 잘 알려진 포트(Well-known Port) 번호
-    * 0 ~ 1023까지의 포트 번호이며, IANA(Internet Assigned Numbers Authority, 인터넷 할당번호 관리기관)에 의해 통제되어 관리가 이루어짐.
+  * 잘 알려진 포트(Well-known Port)
+    * 0 ~ 1023까지의 포트이며, IANA(Internet Assigned Numbers Authority, 인터넷 할당번호 관리기관)에 의해 통제되어 관리가 이루어짐.
       * ex. SSH: 22/TCP, HTTP: 80/TCP, HTTPS: 443/TCP, syslog: 514/TCP 등등.
-  * 등록된 포트(Registered Port) 번호
-    * 1024 ~ 49151까지의 포트 번호이며, IANA에서 할당하지만 통제되지는 않음.
+  * 등록된 포트(Registered Port)
+    * 1024 ~ 49151까지의 포트이며, IANA에서 할당하지만 통제되지는 않음.
     * 임의의 프로그램에서 여러 통신을 위해 등록되며, 통제되지 않기 때문에 다른 용도로 사용 가능함.
       * ex. MySQL: 3306/TCP, Zookeeper: 2181/TCP, ElasticSearch: 9200/TCP, Kibana: 5601/TCP, Grafana: 3000/TCP 등등.
-  * 동적 포트(Dynamix Port) 번호
-    * 49152 ~ 65535까지의 포트 번호이며, 임시 포트이기 때문에 중복 사용이 없다는 전제하에 아무 프로세스에서나 사용 가능함.
+  * 동적 포트(Dynamix Port)
+    * 49152 ~ 65535까지의 포트이며, 임시 포트이기 때문에 중복 사용이 없다는 전제하에 아무 프로세스에서나 사용 가능함.
+
 
 * 참고
   * https://stackoverflow.com/questions/176264/what-is-the-difference-between-a-uri-a-url-and-a-urn
