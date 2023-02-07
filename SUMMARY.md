@@ -5,6 +5,10 @@
   * [HTTP Client](/http/http-client.md)
   * [HTTP Server](/http/http-server.md)
 
+## Java
+
+* [람다식과 함수형 인터페이스](/java/functional-interface.md)
+
 ## Spring Framework
 
 * [Spring](/spring-framework/spring.md)

@@ -42,6 +42,16 @@
       * InputStreamReader: 바이트 단위 데이터를 문자 단위로 변환하여 읽을 때 사용.
       * OutputStreamWriter: 문자 단위의 데이터를 바이트 단위로 변환하여 기록할 때 사용.
 
+* Java try-with-resources
+  * 리소스를 자동으로 해제하도록 제공해주는 구문.
+  * Java 1.7부터 지원되는 기능.
+  * 해당 리소스가 AutoCloseable을 구현한 경우, close()를 명시적으로 호출하지 않아도 
+  try 블록에서 오픈된 리소스는 정상적인 경우나 예외가 발생한 경우 모두 자동으로 close()가 호출됨.
+
+* Java text blocks
+  * 큰따옴표 세개(""")를 이용하여 여러 줄 문자열 초기화를 가능하게 해주는 문법.
+  * Java 15부터 정식으로 지원됨.
+
 * URI, URL, URN
   * URI(Uniform Resource Identifier, 통합 자원 식별자): 인터넷의 자원을 식별할 수 있는 문자열을 의미함. 하위 개념으로 URL, URN이 있음.
     * URL(Uniform Resource Locator): 네트워크 상에서 웹 페이지, 이미지, 동영상 등의 파일이 위치한 경로(Path)를 나타냄.
