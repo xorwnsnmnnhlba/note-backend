@@ -101,6 +101,5 @@
   * 동적 포트(Dynamix Port)
     * 49152 ~ 65535까지의 포트이며, 임시 포트이기 때문에 중복 사용이 없다는 전제하에 아무 프로세스에서나 사용 가능함.
 
-
 * 참고
   * https://stackoverflow.com/questions/176264/what-is-the-difference-between-a-uri-a-url-and-a-urn

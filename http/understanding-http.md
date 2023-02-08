@@ -88,5 +88,5 @@
       * 500 Internal Server Error: 서버가 클라이언트 요청을 처리할 수 없을 때 반환함.
       * 503 Service Unavailable: 서버에 발생한 과부하 혹은 동작오류로 인해 클라이언트 요청을 처리할 준비가 되지 않았을 때 반환함.
 
-* 참고 링크
+* 참고
   * https://developer.mozilla.org/ko/docs/Web/HTTP

@@ -20,7 +20,7 @@
 
 * 캡슐화(Encapsulation)
   * 정보은닉 기법중 하나로써, 클래스에 있는 속성(필드)과 행위(메서드)들을 감싸서 외부 접근을 특정 메서드로만 허용하는 것.
-  * Java의 경우, 접근제어자(public, protected, default(생략 가능), private)를 이용하여 필드와 메서드들의 접근을 강제할 수 있다.
+  * Java의 경우, 접근제어 지시자(public, protected, default(생략 가능), private)를 이용하여 필드와 메서드들의 접근을 강제할 수 있음.
 
 * REST(REpresentational State Transfer) 아키텍처
   * 인터넷상의 시스템 간 상호 운용성(Interoperability)을 제공하는 방법 중 하나.
@@ -30,18 +30,42 @@
   * REST 아키텍처 스타일을 따르는 API.
 
 * REST 아키텍처 스타일
+  * Starting with the Null Style
+    * 어떠한 제약조건도 없는 상태에서 필요에 따라 제약조건들을 하나씩 추가해나감.
   * Client-Server
+    * 클라이언트(Client)가 서버(Server)에 요청을 보내면, 서버는 그에 따른 응답을 클라이언트에게 보내줌.
   * Stateless
+    * 클라이언트의 애플리케이션 상태를 서버에서 관리하지 않음.
   * Cache
+    * 서버에서 가져온 리소스를 클라이언트에서 일정시간동안 다시 사용함.
+      이를 통해, 서버와 클라이언트 간 통신을 줄여서 네트워크 사용량을 감소시켜 효율적인 처리를 가능하게 함.
   * Uniform Interface
-    * Identification of Resources: URI를 이용한 리소스 식별
-    * Manipulation of Resources through Represenations: 표현을 통한 리소스 조작
-    * Self-descriptive Messages
-      * 메시지 스스로 메시지에 대한 설명이 가능해야 한다.
-      * 서버가 변해서 메시지가 변해도 클라이언트는 그 메시지를 보고 해석이 가능하다.
-      * 확장 가능한 커뮤니케이션
-    * HATEOAS(hypermedia as the engine of appliaction state)
-      * 하이퍼미디어(링크)를 통해 애플리케이션 상태 변화가 가능해야한다.
-      * Versioning 할 필요 없이 링크 정보를 동적으로 바꿀 수 있다.
-    * Layered System
-    * Code-On-Demand(optional)
+    * 구성요소 간 균일한 인터페이스를 강조함으로써, 전체 시스템 아키텍처를 단순화하고 상호 작용의 가시성을 향상시킴.
+    * 필딩 제약조건
+      * Identification of Resources: URI를 이용한 리소스 식별
+      * Manipulation of Resources through Represenations: 표현을 통한 리소스 조작
+      * Self-descriptive Messages: 자기 서술 메시지
+        * 메시지 스스로 메시지에 대한 설명이 가능해야 함.
+        * 서버가 변해서 메시지가 변해도, 클라이언트는 그 메시지를 보고 해석이 가능해야 함.
+        * 확장 가능한 커뮤니케이션.
+      * HATEOAS(Hypermedia as the Engine of Appliaction State)
+        * 하이퍼미디어(링크)를 통해 애플리케이션 상태 변화가 가능해야 함.
+        * Versioning할 필요 없이 링크 정보를 동적으로 바꿀 수 있음.
+    * HAL(Hypertext Application Language)을 이용하여 Self-descriptive Messages와 HATEOAS를 충족시킬 수 있음.
+      * HAL의 _links에 profile 링크를 추가하여 메시지에 대한 설명을 넣을 수 있음.
+  * Layered System
+  * Code-On-Demand(optional)
+
+* MIME(Multipurpose Internet Mail Extensions) type
+  * 인터넷 상에서 콘텐츠들을 주고받을 때 표현하는 타입. 콘텐츠 타입(Content Type), 미디어 타입(Media Type)이라고도 함.
+  * HTTP 헤더에 Content-Type 속성으로 전달하며, (type)/(subtype) 형태로 사용함.
+  * 자주 사용하는 MIME type
+    * text/plain: 텍스트 파일에 대한 기본 type이며, E-mail에서 자주 사용함.
+    * text/html: 일반적인 HTML 문서를 주고받을 때 사용함.
+    * text/css: CSS 파일을 주고받을 때 사용함.
+    * text/javascript: JS 파일을 주고받을 때 사용함.
+    * application/xml: XML 형태 데이터를 주고받을 때 사용함. Self-descriptive하기 상대적으로 어려운 편.
+    * application/json: JSON 형태 데이터를 주고받을 때 사용함. Self-descriptive하기 상당히 어려움.
+
+* 참고
+  * 인프런 <스프링 기반 REST API 개발> - 백기선

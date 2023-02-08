@@ -21,5 +21,5 @@
   * 채널을 사용하여 양방향 버퍼를 통해 데이터 통신을 진행할 수 있도록 해주는 클래스들의 모음.
   * Non-Blocking 방식의 IO 사용 가능함.
 
-* 참고 링크
+* 참고
   * https://homoefficio.github.io/2017/02/19/Blocking-NonBlocking-Synchronous-Asynchronous/
