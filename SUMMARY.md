@@ -14,3 +14,7 @@
 * [Spring](/spring-framework/spring.md)
   * [Spring Boot](/spring-framework/spring-boot.md)
   * [Spring Web MVC](/spring-framework/spring-web-mvc.md)
+
+## REST API
+
+* [REST API](/rest-api/rest-api.md)
