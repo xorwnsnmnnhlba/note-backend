@@ -18,5 +18,7 @@
     * 예시
       * /session -> 세션은 오직 하나만 유지되므로, 단수형으로 표현함.
 
+<br>
+
 * 참고
   * https://learn.microsoft.com/ko-kr/azure/architecture/best-practices/api-design#organize-the-api-design-around-resources

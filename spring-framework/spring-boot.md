@@ -3,6 +3,8 @@
 * Spring Initializr
   * 웹 상에서 Spring 프로젝트를 만들어주는 기능을 제공하는 도구.
 
+<br>
+
 * Web Server와 Web Application Server(WAS)
   * Web Server
     * 클라이언트의 HTTP 요청을 받아 HTML, CSS, 이미지 등등의 정적 콘텐츠를 제공해주는 서버.
@@ -14,6 +16,8 @@
     * Tomcat
       * Apache 소프트웨어 재단에서 만든 WAS이며, JSP/Servlet이 실행할 수 있는 환경을 제공해줌.
 
+<br>
+
 * Spring Boot
   * Spring 기반 애플리케이션을 쉽게 사용하도록 도와주는 도구.
     * 여러 Setting의 복잡성을 최소화하고 비즈니스 로직 구현에 전념할 수 있게 함.
@@ -24,9 +28,9 @@
   * Spring Boot 자체를 서버로 볼수는 없음.
   * WAS로 구동하여 사용 가능하도록 자동 설정을 통해 아래 모든 과정을 보다 상세하고 유연하게 설정하여 실행할 수 있도록 도와줌.
     * Tomcat 객체 생성
-	  * Port 설정
-	  * Tomcat에 컨텍스트 추가
-	  * Servlet 만들기
-	  * Tomcat에 Servlet 추가
-	  * 컨텍스트에 Servlet 매핑
-	  * Tomcat 실행 및 대기
+    * Port 설정
+    * Tomcat에 컨텍스트 추가
+    * Servlet 만들기
+    * Tomcat에 Servlet 추가
+    * 컨텍스트에 Servlet 매핑
+    * Tomcat 실행 및 대기

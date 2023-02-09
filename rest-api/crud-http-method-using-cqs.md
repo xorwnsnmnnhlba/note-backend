@@ -5,9 +5,13 @@
     * Create/Update/Update의 경우, 대상 데이터의 상태가 변함(Command).
     * Read의 경우, 대상 데이터의 상태가 변하지 않으므로 분산처리 혹은 캐싱이 수월함(Query).
 
+<br>
+
 * CQS(Command-Query Separation)
   * 상태를 변환하는 메서드인 명령(Command)과 상태를 반환하는 메서드인 질의(Query)를 구분하는 디자인 패턴.
   * 하나의 메서드에서 명령과 질의를 동시에 처리할 수 없다는 의미를 가지고 있음.
+
+<br>
 
 * HTTP Method에서의 CRUD 활용
   * Collection Pattern과 HTTP Method를 이용해 CRUD를 표현할 수 있음.

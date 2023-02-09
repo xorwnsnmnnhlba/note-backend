@@ -3,9 +3,13 @@
 * 인터넷 프로토콜 스위트(Internet Protocol Suite)
   * 인터넷 상에서 호스트들이 서로 통신할 때 쓰이는 규약(프로토콜)들의 집합.
 
+<br>
+
 * TCP/IP(Transmission Control Protocol/Internet Protocol)
   * 인터넷 상에서 호스트들이 서로 통신할 때 쓰이는 가장 기본적인 프로토콜.
   * 데이터를 주고받을 때 의도한대로 통신이 이루어질 수 있도록 보장해줌.
+
+<br>
 
 * TCP와 UDP
   * 전송 계층의 대표적인 프로토콜
@@ -27,13 +31,19 @@
     * 비연결성 프로토콜로써, 데이터를 보낼 때 연결을 맺는 작업을 수행하지 않음.
     * 데이터와 패킷 전달 순서가 보장되지 않음.
 
+<br>
+
 * 소켓(Socket)
   * 프로세스 간 통신(Inter Process Communication, IPC)의 종착점을 의미함.
   * 호스트 간 네트워크 통신 창구 역할을 수행.
   * 기본적으로 파일과 유사하게 다룰 수 있음.
 
+<br>
+
 * 버클리 소켓(Berkeley Sockets, BSD)
   * 프로세스 간 통신에 사용되는 인터넷 소켓, 유닉스 도메인 소켓을 위한 API.
+
+<br>
 
 * Java에서의 소켓 활용
   * 데이터가 전송되는 통로라 할 수 있는 스트림(Stream)을 이용하여 프로세스 간 통신 수행.
@@ -42,15 +52,21 @@
       * InputStreamReader: 바이트 단위 데이터를 문자 단위로 변환하여 읽을 때 사용.
       * OutputStreamWriter: 문자 단위의 데이터를 바이트 단위로 변환하여 기록할 때 사용.
 
+<br>
+
 * Java try-with-resources
   * 리소스를 자동으로 해제하도록 제공해주는 구문.
   * Java 1.7부터 지원되는 기능.
   * 해당 리소스가 AutoCloseable을 구현한 경우, close()를 명시적으로 호출하지 않아도 
   try 블록에서 오픈된 리소스는 정상적인 경우나 예외가 발생한 경우 모두 자동으로 close()가 호출됨.
 
+<br>
+
 * Java text blocks
   * 큰따옴표 세개(""")를 이용하여 여러 줄 문자열 초기화를 가능하게 해주는 문법.
   * Java 15부터 정식으로 지원됨.
+
+<br>
 
 * URI, URL, URN
   * URI(Uniform Resource Identifier, 통합 자원 식별자): 인터넷의 자원을 식별할 수 있는 문자열을 의미함. 하위 개념으로 URL, URN이 있음.
@@ -63,6 +79,8 @@
     * <pre class="language-ini"><code class="lang-ini">scheme://host:port/path?query#fragment</code></pre>
 
 <figure><img src="./images/uri-url-urn.png" alt=""></figure>
+
+<br>
 
 * 호스트(Host)
   * 네트워크 상에 연결되어 통신 가능한 장치를 의미. 식별 가능한 하나 이상의 IP 주소를 가지고 있음.
@@ -89,6 +107,8 @@
       * DDNS(Dynamic DNS)
         * DNS에 매칭된 IP 주소가 변경되어도 해당 도메인으로 접속 가능하도록 제공해주는 시스템.
   
+<br>
+
 * 포트(Port)
   * IP 내에서 프로세스 간 통신 구분을 위해 사용하는 번호. 0부터 65535(2^32 - 1)까지 할당 가능함.
   * 잘 알려진 포트(Well-known Port)
@@ -100,6 +120,8 @@
       * ex. MySQL: 3306/TCP, Zookeeper: 2181/TCP, ElasticSearch: 9200/TCP, Kibana: 5601/TCP, Grafana: 3000/TCP 등등.
   * 동적 포트(Dynamix Port)
     * 49152 ~ 65535까지의 포트이며, 임시 포트이기 때문에 중복 사용이 없다는 전제하에 아무 프로세스에서나 사용 가능함.
+
+<br>
 
 * 참고
   * https://stackoverflow.com/questions/176264/what-is-the-difference-between-a-uri-a-url-and-a-urn

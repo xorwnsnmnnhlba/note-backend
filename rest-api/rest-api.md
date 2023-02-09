@@ -4,12 +4,18 @@
   * 응용 소프트웨어와 시스템 소프트웨어(OS) 간의 통신을 쉽게 해줄 수 있는 인터페이스.
   * 애플리케이션을 빌드하고 통합하기 위한 정의 및 프로토콜 세트를 의미함.
 
+<br>
+
 * 라이브러리(Library)
   * API를 기반으로 특정 기능들이 구현된 함수 혹은 메서드들의 집합체를 의미함.
 
+<br>
+
 * 프레임워크(Framework)
-  * 여러 API와 라이브러리들을 합쳐서 특정 기능들을 제공해주는 골격 및 뼈대를 의미함.  
+  * 여러 API와 라이브러리들을 합쳐서 특정 기능들을 제공해주는 골격 및 뼈대를 의미함.
   * 완성된 하나의 제품을 만들기 위한 기반을 제공해줌.
+
+<br>
 
 * 정보은닉(Information Hiding)
   * 객체지향 언어적 요소를 활용하여 인스턴스에 대한 구체적인 정보를 노출시키지 않도록 하는 기법.
@@ -22,12 +28,18 @@
   * 정보은닉 기법중 하나로써, 클래스에 있는 속성(필드)과 행위(메서드)들을 감싸서 외부 접근을 특정 메서드로만 허용하는 것.
   * Java의 경우, 접근제어 지시자(public, protected, default(생략 가능), private)를 이용하여 필드와 메서드들의 접근을 강제할 수 있음.
 
+<br>
+
 * REST(REpresentational State Transfer) 아키텍처
   * 인터넷상의 시스템 간 상호 운용성(Interoperability)을 제공하는 방법 중 하나.
   * 시스템 제각각의 독립적인 진화를 보장하기 위한 방법.
 
+<br>
+
 * REST API
   * REST 아키텍처 스타일을 따르는 API.
+
+<br>
 
 * REST 아키텍처 스타일
   * Starting with the Null Style
@@ -56,6 +68,8 @@
   * Layered System
   * Code-On-Demand(optional)
 
+<br>
+
 * MIME(Multipurpose Internet Mail Extensions) type
   * 인터넷 상에서 콘텐츠들을 주고받을 때 표현하는 타입. 콘텐츠 타입(Content Type), 미디어 타입(Media Type)이라고도 함.
   * HTTP 헤더에 Content-Type 속성으로 전달하며, (type)/(subtype) 형태로 사용함.
@@ -66,6 +80,8 @@
     * text/javascript: JS 파일을 주고받을 때 사용함.
     * application/xml: XML 형태 데이터를 주고받을 때 사용함. Self-descriptive하기 상대적으로 어려운 편.
     * application/json: JSON 형태 데이터를 주고받을 때 사용함. Self-descriptive하기 상당히 어려움.
+
+<br>
 
 * 참고
   * 인프런 <스프링 기반 REST API 개발> - 백기선
