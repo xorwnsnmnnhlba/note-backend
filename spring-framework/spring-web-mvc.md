@@ -41,7 +41,8 @@
     * HttpMessageConverter를 사용하여 데이터를 응답 본문 메시지로 보낼 때 사용하는 애노테이션.
     * @RestController 애노테이션이 사용된 클래스의 모든 메서드는 @ResponseBody 애노테이션이 기본으로 내장되어 있음.
   * @PathVariable
-    * URI에 있는 템플릿 변수를 읽을 때 사용. 메서드 변수명과 템플릿 변수명이 서로 같은 경우 생략가능.
+    * URI에 있는 템플릿 변수를 읽을 때 사용. 메서드 변수명 앞에 @PathVariable("템플릿_변수명")처럼 넣어서 사용 가능.  
+      메서드 변수명과 템플릿 변수명이 서로 같은 경우, 템플릿 변수명 생략 가능함.
   * @RequestMapping
     * 클라이언트를 통해 들어온 요청을 임의의 메서드와 매핑하기 위해 사용하는 애노테이션.
     * Request 키워드 대신 앞부분에 HTTP 메서드를 넣어서 사용할 수 있음. @RequestMapping(method=RequestMethod.{METHOD_NAME})과 같은 의미를 가짐.
@@ -51,4 +52,6 @@
       * @PatchMapping: PATCH 요청이 들어왔을 때 사용하는 애노테이션.
       * @DeleteMapping: DELETE 요청이 들어왔을 때 사용하는 애노테이션.
   * @ExceptionHandler
-    * Spring Web MVC에서 예외 처리시에 사용하는 애노테이션.
+    * Spring Web MVC에서 예외처리시에 사용하는 애노테이션.
+  * @ResponseStatus
+    * 응답으로 온 HTTP 상태코드에 대한 처리를 진행하는 애노테이션. 예외처리 시, @ExceptionHandler와 함께 주로 사용함.
