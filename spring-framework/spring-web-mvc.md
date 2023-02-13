@@ -52,6 +52,6 @@
       * @PatchMapping: PATCH 요청이 들어왔을 때 사용하는 애노테이션.
       * @DeleteMapping: DELETE 요청이 들어왔을 때 사용하는 애노테이션.
   * @ExceptionHandler
-    * Spring Web MVC에서 예외처리시에 사용하는 애노테이션.
+    * Spring Web MVC에서 예외처리 시에 사용하는 애노테이션.
   * @ResponseStatus
     * 응답으로 온 HTTP 상태코드에 대한 처리를 진행하는 애노테이션. 예외처리 시, @ExceptionHandler와 함께 주로 사용함.
