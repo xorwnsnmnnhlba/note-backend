@@ -20,9 +20,29 @@
     * 직렬화에 필요한 Serializable 인터페이스를 구현해야 함.
     * 인자가 없는 기본 생성자를 가지고있어야 함.
 * EJB(Enterprise JavaBeans)
+  * 기업 환경에서 주로 사용하는 Java EE(Enterprise Edition)를 위한 서버사이드 컴포넌트.
 
 * Java의 record
   * Java 16부터 정식으로 추가된 클래스로써, 변하지 않는(immutable) 데이터 인스턴스를 생성할 때 유용하게 사용할 수 있음.
   * DTO 구현 시, 자주 사용하는 Getter, Setter, equals, hashCode, toString 등등의 메서드들에 대한 번거로운 구현을 줄일 수 있게 됨. 필요에 따라 오버라이딩도 가능함.
-* DAO
-* ORM
+* DAO(Data Access Object)
+  * 영속성을 가진 모듈인 DB에 접근하여 데이터를 처리하는 객체를 의미함.
+  * JPA에서는 DB에 직접 접근하는 Repository 인스턴스들을 DAO라 볼 수 있음.
+* ORM(Object-Relational Mapping)
+  * 객체와 관계형 데이터베이스(RDBMS)를 매핑하는 것.
+  * Java 애플리케이션의 클래스와 SQL DB 테이블 사이의 매핑 정보를 기술한 메타데이터를 사용하여,  
+    Java 애플리케이션의 인스턴스를 SQL DB 테이블에 자동으로 영속화해주는 기술이라 할 수 있음.  
+  * 객체를 DB에 저장/수정/삭제할 때 SQL insert/update/delete문을 직접 작성하지 않고,  
+    Java에서 인스턴스를 List, Map 등등에 저장하듯이 ORM 프레임워크에 저장하여 진행할 수 있음.
+  * RDBMS를 이용하더라도 객체 모델링에 집중할 수 있어서 효율적인 객체지향 개발이 가능해짐.
+  * 특정 벤더에 대한 의존성(Dependency)이 낮음.
+  * 위와 같은 장점 때문에 학습곡선(Learning Curve)이 다소 높더라도 많은 개발자들이 애용하고 있음.
+  * ORM 패러다임 불일치
+    * 객체를 RDBMS에 매핑시키면서 발생하는 문제.
+    * 객체와 RDBMS는 지향하는 목적이 서로 다르므로, 기능과 표현방법에 있어 차이를 보임.
+    * 객체 모델링을 정교하게 진행할수록 문제가 커질 수 있음.
+    * Java에서는 이러한 불일치를 해결하기 위해 JPA(Java Persistence API)가 등장함.
+
+* 참고
+  * 인프런 <스프링 Data JPA> - 백기선
+  * <자바 ORM 표준 JPA 프로그래밍> - 김영한

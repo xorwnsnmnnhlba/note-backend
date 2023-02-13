@@ -20,3 +20,8 @@
 * [REST API](/rest-api/rest-api.md)
 * [Collection Pattern](/rest-api/collection-pattern.md)
 * [CQS가 적용된 HTTP Method에서의 CRUD 활용](/rest-api/crud-http-method-using-cqs.md)
+
+## DTO & JSON & CORS
+
+* [DTO](/dto-json-cors/dto.md)
+* [직렬화](/dto-json-cors/serialization.md)
