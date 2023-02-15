@@ -29,7 +29,7 @@
   * Java에서 작성된 소프트웨어 컴포넌트.
   * 구성요건
     * Java에서 속성값을 나타내는 필드와 속성값 저장 및 불러오는 동작을 수행하는 Getter/Setter 메서드를 갖춰야 함.
-    * 필드는 private로 선언되어야 하며, Getter/Setter 메서드는 public으로 선언되어야 함.
+    * 필드는 private으로 선언되어야 하며, Getter/Setter 메서드는 public으로 선언되어야 함.
     * 직렬화에 필요한 Serializable 인터페이스를 구현해야 함.
     * 인자가 없는 기본 생성자를 가지고있어야 함.
 

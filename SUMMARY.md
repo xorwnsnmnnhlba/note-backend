@@ -24,5 +24,5 @@
 ## DTO & JSON & CORS
 
 * [DTO](/dto-json-cors/dto.md)
-* [직렬화](/dto-json-cors/serialization.md)
+* [직렬화(Serialization), Marshalling, JSON](/dto-json-cors/serialization-marshalling-JSON.md)
 * [CORS](/dto-json-cors/cors.md)

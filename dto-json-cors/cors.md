@@ -38,7 +38,9 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("http://localhost:3000"); 
     } 
 }
+```
 
+```
 // @SpringBootApplication 애노테이션이 있는 메인 애플리케이션 클래스에 설정하는 경우
 @SpringBootApplication
 public class App {
