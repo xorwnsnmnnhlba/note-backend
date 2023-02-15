@@ -22,12 +22,13 @@
 
 * Spring Boot에서의 CORS 활용
   * 허용하려는 클래스 혹은 메서드 위에 @CrossOrigin 애노테이션을 붙여줘야 함.
-  * 전역적으로 설정하기 위해서는 WebMvcConfigurer 인터페이스를 구현하는 Configuration 클래스에 addCorsMappings 메서드를 오버라이딩하여 관련 설정을 적절하게 넣어줘야 함.
+  * 모든 컨트롤러에 전역적으로 설정하려는 경우, WebMvcConfigurer 인터페이스를 구현하는 Configuration 클래스에 addCorsMappings 메서드를 오버라이딩하여 관련 설정을 적절하게 넣어줘야 함.
     * addMapping 메서드에 허용할 경로(Path)를 넣어줌.
     * allowedMethods 메서드에 허용할 HTTP 메서드를 넣어줌.
     * allowedOrigins 메서드에 허용할 요청 URL을 넣어줌. 만약 따로 쓰지않는 경우, 모든 요청 URL 허용됨.
 
 ```
+// 별도의 Configuration 클래스를 선언하여 설정하는 경우
 @Configuration 
 public class WebConfig implements WebMvcConfigurer { 
     @Override 
@@ -38,16 +39,24 @@ public class WebConfig implements WebMvcConfigurer {
     } 
 }
 
-@Bean
-public WebMvcConfigurer webMvcConfigurer() {
-    return new WebMvcConfigurer() {
-        @Override
-        public void addCorsMappings(CorsRegistry registry) {
-          registry.addMapping("/**")
-                  .allowedMethods("GET", "POST", "PATCH", "DELETE", "OPTIONS")
-                  .allowedOrigins("http://localhost:3000");
-        }
-  };
+// @SpringBootApplication 애노테이션이 있는 메인 애플리케이션 클래스에 설정하는 경우
+@SpringBootApplication
+public class App {
+
+    public static void main(String[] args) {
+        SpringApplication.run(App.class, args);
+    }
+
+    @Bean
+    public WebMvcConfigurer webMvcConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**");
+            }
+        };
+    }
+
 }
 ```
 
