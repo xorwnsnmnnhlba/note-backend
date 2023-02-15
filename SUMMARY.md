@@ -25,3 +25,4 @@
 
 * [DTO](/dto-json-cors/dto.md)
 * [직렬화](/dto-json-cors/serialization.md)
+* [CORS](/dto-json-cors/cors.md)
