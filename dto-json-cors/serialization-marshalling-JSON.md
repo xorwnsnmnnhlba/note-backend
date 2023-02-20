@@ -30,7 +30,7 @@
   * Key-Value 형식으로 이루어져 있으며, Key/Value 양쪽에 "(큰따옴표)를 붙임.
   * 사람이 이해하기 쉽고, 기계 입장에서도 해석이 용이함.
   * {}(중괄호)를 이용하여 하나의 객체를 구성하고, \[\](대괄호)를 이용하여 여러 값을 구성할 수 있음.
-  * JavaScript로 구현된 FrontEnd와 Java로 구현된 Backend와의 통신을 위해 사용함.
+  * JavaScript로 구현된 Frontend와 Java로 구현된 Backend와의 통신을 위해 사용함.
     * Frontend에서 데이터 전송 시 JSON.stringify를 이용하여 직렬화 후 Backend로 넘겨주게 됨.
     * Backend로부터 전송된 데이터를 받아서 사용할 때는 JSON.parse를 이용하여 역직렬화 후 사용함.
 

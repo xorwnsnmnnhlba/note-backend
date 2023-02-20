@@ -42,7 +42,21 @@
 
 * Java record
   * Java 16부터 정식으로 추가된 클래스로써, 변하지 않는(immutable) 데이터 인스턴스를 생성할 때 유용하게 사용할 수 있음.
-  * DTO 구현 시, 자주 사용하는 Getter, Setter, equals, hashCode, toString 등등의 메서드들에 대한 번거로운 구현을 줄일 수 있게 됨. 필요에 따라 오버라이딩도 가능함.
+  * DTO 구현 시, 자주 사용하는 Getter, equals, hashCode, toString 등등의 메서드들에 대한 번거로운 구현을 줄일 수 있게 됨.
+  * 클래스 변수 선언 가능하며, 필요에 따라 메서드 오버라이딩도 가능함.
+  * 매개변수로 넣은 필드들이 모두 변하지 않는 final로 생성되기 때문에, Setter는 제공하지 않음.
+  * Getter는 getXXX() 형식이 아니라, 필드명과 유사하게 생성됨.
+  * 선언한 필드에 대한 제약조건을 걸어서 예외처리가 가능하도록 설정할 수 있음.
+
+```
+public record Account(String email, Integer birthYear) {
+    public Account {
+        if ( birthYear < 0 ) {
+            throw new CustomException();
+        }
+    }
+}
+```
 
 <br>
 
