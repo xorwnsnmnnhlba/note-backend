@@ -1,9 +1,8 @@
 ## HTTP
 
-* [HTTP 기초](/http/http.md)
-  * [HTTP의 이해](/http/understanding-http.md)
-  * [HTTP Client](/http/http-client.md)
-  * [HTTP Server](/http/http-server.md)
+* [HTTP의 이해](/http/understanding-http.md)
+* [HTTP Client](/http/http-client.md)
+* [HTTP Server](/http/http-server.md)
 
 ## Java
 
@@ -12,8 +11,8 @@
 ## Spring Framework
 
 * [Spring](/spring-framework/spring.md)
-  * [Spring Boot](/spring-framework/spring-boot.md)
-  * [Spring Web MVC](/spring-framework/spring-web-mvc.md)
+* [Spring Boot](/spring-framework/spring-boot.md)
+* [Spring Web MVC](/spring-framework/spring-web-mvc.md)
 
 ## REST API
 
@@ -26,3 +25,7 @@
 * [DTO](/dto-json-cors/dto.md)
 * [직렬화, Marshalling, JSON](/dto-json-cors/serialization-marshalling-JSON.md)
 * [CORS](/dto-json-cors/cors.md)
+
+## Layered Architecture
+
+* [Layered Architecture](/layered-architecture/layered-architecture.md)
