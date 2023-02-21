@@ -13,6 +13,7 @@
   * 위 과정을 모듈화라고 하며, 그에 따른 개별적 요소를 모듈이라 함.
   * 모듈에 대한 독립성 척도를 결합도와 응집도를 통해 측정할 수 있음.
     * 결합도는 낮을수록 좋고, 응집도는 높을수록 좋음.
+    * 보통 응집도가 높아지게 되면, 결합도는 대체적으로 낮아지게 됨.
 
 <br>
 
@@ -62,13 +63,42 @@
 <br>
 
 * 범용 고유 식별자(Universally Unique IDentifier, UUID)
-  * 네트워크 상에서 고유한 데이터 및 리소스를 표기하기 위한 표준규약.
+  * 네트워크 상에서 고유한 데이터 및 리소스를 표기하기 위한 표준규약 식별자.
   * 아래와 같이 32개의 16진수와 4개의 하이픈(-)으로 구성됨.
     * <pre class="language-ini"><code class="lang-ini">11111111-aaaa-bbbb-cccc-222233334444</code></pre>
   * Java의 경우, java.util 패키지의 UUID 클래스에 있는 randomUUID() 메서드를 이용하여 생성 가능.
 
 <br>
 
+* ULID(Universally Unique Lexicographically Sortable IDentifier)
+  * 무작위로 생성되는 UUID의 단점을 보완하여 나온 식별자.
+  * 48bits의 Timestamp와 80bits의 무작위 생성 문자로 구성됨.
+  * 앞쪽에 Timestamp가 들어가기 때문에 순서가 보장되며, 특수문자가 없음.
+  * ulid-creator 의존성을 추가해줘야 함.
+```  
+ 01AN4Z07BY      79KA1307SR9X4MV3
+
+|----------|    |----------------|
+ Timestamp          Randomness
+   48bits             80bits
+```
+```
+  implementation 'com.github.f4b6a3:ulid-creator:5.1.0'
+```
+
+<br>
+
+* TSID(Time-Sorted Unique IDentifier)
+  * ULID를 개선하여 나온 식별자. 시간 순으로 정렬 가능함.
+  * tsid-creator 의존성을 추가해줘야 함.
+```
+implementation 'com.github.f4b6a3:tsid-creator:5.2.0'
+```
+
+<br>
+
 * 참고
   * https://medium.com/@jang.wangsu/설계-용어-응집도와-결합도-b5e2b7b210ff
   * https://www.oreilly.com/library/view/software-architecture-patterns/9781491971437/ch01.html
+  * https://github.com/ulid/spec
+  * https://github.com/f4b6a3/tsid-creator
