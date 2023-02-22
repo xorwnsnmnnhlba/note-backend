@@ -75,6 +75,7 @@
   * 48bits의 Timestamp와 80bits의 무작위 생성 문자로 구성됨.
   * 앞쪽에 Timestamp가 들어가기 때문에 순서가 보장되며, 특수문자가 없음.
   * ulid-creator 의존성을 추가해줘야 함.
+  
 ```  
  01AN4Z07BY      79KA1307SR9X4MV3
 

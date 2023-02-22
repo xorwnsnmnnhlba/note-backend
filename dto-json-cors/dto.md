@@ -62,7 +62,6 @@ public record Account(String email, Integer birthYear) {
 
 * DAO(Data Access Object)
   * 영속성을 가진 모듈인 DB에 접근하여 데이터를 처리하는 객체를 의미함.
-  * JPA에서는 DB에 직접 접근하는 Repository 인스턴스들을 DAO라 볼 수 있음.
 
 <br>
 
