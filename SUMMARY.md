@@ -31,3 +31,7 @@
 * [Layered Architecture](/layered-architecture/layered-architecture.md)
 * [Data Access](/layered-architecture/data-access.md)
 * [Domain Model](/layered-architecture/domain-model.md)
+
+## DI & Spring Test
+
+* [Dependency Injection](/di-spring-test/dependency-injection.md)
