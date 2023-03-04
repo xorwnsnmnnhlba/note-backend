@@ -35,3 +35,5 @@
 ## DI & Spring Test
 
 * [Dependency Injection](/di-spring-test/dependency-injection.md)
+* [Unit Test](/di-spring-test/unit-test.md)
+* [Spring Test](/di-spring-test/spring-test.md)
