@@ -27,7 +27,7 @@
 build.gradle
 
 dependencies {
-    implementation 'org.postgresql:postgresql:42.5.4'
+	implementation 'org.postgresql:postgresql:42.5.4'
 }
 
 
@@ -55,6 +55,7 @@ public class App {
 						System.out.println(name);
 				}
 		}
+
 }
 ```
 
@@ -91,9 +92,9 @@ spring:
 @AllArgsConstructor
 public class Post {
 
-    private String id;
+	private String id;
 
-    private String title;
+	private String title;
 
 }
 
@@ -102,26 +103,26 @@ public class Post {
 @RequiredArgsConstructor
 public class AppRunner implements CommandLineRunner {
 
-    private final JdbcTemplate jdbcTemplate;
+	private final JdbcTemplate jdbcTemplate;
 
-    private final TransactionTemplate transactionTemplate;
+	private final TransactionTemplate transactionTemplate;
 
-    @Override
-    public void run(String... args) throws Exception {
-        String query = "SELECT * FROM people WHERE name LIKE ?";
+	@Override
+	public void run(String... args) throws Exception {
+		String query = "SELECT * FROM people WHERE name LIKE ?";
 
-        System.out.println("-".repeat(80));
+		System.out.println("-".repeat(80));
 
-        jdbcTemplate.query(query, resultSet -> {
-            while (resultSet.next()) {
-                String name = resultSet.getString("name");
-                System.out.println(name);
-            }
-            return null;
-        }, "%우%");
+		jdbcTemplate.query(query, resultSet -> {
+			while (resultSet.next()) {
+				String name = resultSet.getString("name");
+				System.out.println(name);
+			}
+			return null;
+		}, "%우%");
 
-        System.out.println("-".repeat(80));
-    }
+		System.out.println("-".repeat(80));
+	}
 
 //    @Override
 //    public void run(String... args) throws Exception {
@@ -159,6 +160,39 @@ public class PostDao {
         return posts;
     }
 
+}
+```
+
+<br>
+
+* RowMapper
+	* JdbcTemplate에서 행(Row) 단위로 결과집합(ResultSet)의 행을 매핑하기 위해 사용하는 함수형 인터페이스.
+	* 특정 인스턴스에 해당하는 결과값을 행 단위로 가져올 수 있음.
+```
+@Component
+@RequiredArgsConstructor
+public class PostDao {
+
+    private final JdbcTemplate jdbcTemplate;
+
+	@Override
+	public List<Post> findAll() {
+		List<Post> posts = new ArrayList<>();
+		String query = "SELECT * FROM posts";
+
+		return jdbcTemplate.query(query, postRowMapper());
+	}
+
+	@Override
+	public Post find(PostId id) {
+		String query = "SELECT * FROM posts where id = ?";
+		return jdbcTemplate.queryForObject(query, postRowMapper(), id.toString());
+	}
+
+	private RowMapper<Post> postRowMapper() {
+		return (rs, rowNum) ->
+			new Post(PostId.of(rs.getString("id")), rs.getString("title"),
+			rs.getString("author"), rs.getString("content"));
 }
 ```
 
