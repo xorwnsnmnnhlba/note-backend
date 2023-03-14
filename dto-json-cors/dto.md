@@ -66,25 +66,4 @@ public record Account(String email, Integer birthYear) {
 <br>
 
 * ORM(Object-Relational Mapping)
-  * 객체와 관계형 데이터베이스(RDBMS)를 매핑하는 것.
-  * Java 애플리케이션의 클래스와 SQL DB 테이블 사이의 매핑 정보를 기술한 메타데이터를 사용하여,  
-    Java 애플리케이션의 인스턴스를 SQL DB 테이블에 자동으로 영속화해주는 기술이라 할 수 있음.  
-  * 객체를 DB에 저장/수정/삭제할 때 SQL insert/update/delete문을 직접 작성하지 않고,  
-    Java에서 인스턴스를 List, Map 등등에 저장하듯이 ORM 프레임워크에 저장하여 진행할 수 있음.
-  * RDBMS를 이용하더라도 객체 모델링에 집중할 수 있어서 효율적인 객체지향 개발이 가능해짐.
-  * 특정 벤더에 대한 의존성(Dependency)이 낮음.
-  * 위와 같은 장점 때문에 학습곡선(Learning Curve)이 다소 높더라도 많은 개발자들이 애용하고 있음.
-
-<br>
-
-* ORM 패러다임 불일치
-  * 객체를 RDBMS에 매핑시키면서 발생하는 문제.
-  * 객체와 RDBMS는 지향하는 목적이 서로 다르므로, 기능과 표현방법에 있어 차이를 보임.
-  * 객체 모델링을 정교하게 진행할수록 문제가 커질 수 있음.
-  * Java에서는 이러한 불일치를 해결하기 위해 JPA(Java Persistence API)가 등장함.
-
-<br>
-
-* 참고
-  * 인프런 <스프링 Data JPA> - 백기선
-  * <자바 ORM 표준 JPA 프로그래밍> - 김영한
+  * 객체와 관계형 데이터베이스(RDBMS)를 매핑하는 기술.

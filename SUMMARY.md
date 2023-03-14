@@ -42,3 +42,8 @@
 
 * [Database](/database/database.md)
 * [JDBC](/database/jdbc.md)
+
+## JPA
+
+* [ORM](/jpa/orm.md)
+* [Hibernate](/jpa/hibernate.md)

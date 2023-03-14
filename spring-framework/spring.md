@@ -3,7 +3,7 @@
 * Spring Framework
   * Java/Groovy/Kotlin 기반의 Web Framework
   * J2EE(Java to Plaform Enterprice Edition) 명세의 복잡성에 대응하기 위한 프로젝트로 시작됨.
-    * Jakarta EE(J2EE의 후속작)와 경쟁 관계로 오해할 수 있으나, 실제로는 상호 보완적임.
+    * Jakarta EE(J2EE의 후속작 - J2EE가 오라클에서 이클립스 재단으로 이관되면서 상표권 이슈가 발생하여 명칭 변경)와 경쟁 관계로 오해할 수 있으나, 실제로는 상호 보완적임.
 
 <br>
 
