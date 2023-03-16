@@ -47,3 +47,4 @@
 
 * [ORM](/jpa/orm.md)
 * [Hibernate](/jpa/hibernate.md)
+* [Value Type](/jpa/value-type.md)
