@@ -3,6 +3,7 @@
 * Aggregate Mapping
   * 엔티티 필드 구성 시, 기본 자료형을 사용하는것보다는 의미가 담긴 VO(Value Object)를 사용하는 것이 좋음.
   * @Embeddable 애노테이션을 이용하여 VO를 구성하며, 구성한 VO를 엔티티의 필드로 넣을 때 @Embedded 애노테이션을 사용함.
+  * @Enumerated(EnumType.STRING) 애노테이션을 이용하여 엔티티 필드를 열거형(Enum)으로 구성할 수 있음.
   * 예시
     * 이름 - 성(lastName), 이름(firstName) 구분.
     * 주소 - 도로명(street), 시(city), 도(state), 우편번호(zipCode) 구분.
