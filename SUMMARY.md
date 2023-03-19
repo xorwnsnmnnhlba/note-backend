@@ -48,3 +48,5 @@
 * [ORM](/jpa/orm.md)
 * [Hibernate](/jpa/hibernate.md)
 * [Value Type](/jpa/value-type.md)
+* [Relationship Mapping](/jpa/relationship-mapping.md)
+* [Spring Data JPA](/jpa/spring-data-jpa.md)

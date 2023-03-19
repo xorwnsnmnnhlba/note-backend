@@ -48,6 +48,18 @@
   * 데이터베이스 테이블과 엔티티를 매핑하는 작업은 JPA 프로그래밍에서 가장 기본적인 것이라 볼 수 있음.
     * 도메인 모델을 생성했다면, JPA 구현체에게 생성한 모델을 어떻게 매핑시킬지 알려줘야 함. 애노테이션을 통해 매핑 가능.
 
+<br>
+
+* 엔티티 생명주기
+	* Transient: 엔티티가 존재하는지 여부를 JPA가 모르는 상태.
+	* Persistent: 엔티티를 JPA가 관리중인 상태(1차 캐시, Dirty Checking, Write Behind 등등)
+	* Detached: JPA에 의해 관리되고있었던 엔티티를 더이상 관리하지 않는 상태.
+	* Removed: JPA가 관리하고 있었던 엔티티를 삭제하기로 한 상태.
+
+<figure><img src="./images/entity-lifecycle.png" alt=""></figure>
+
+<br>
+
 * 참고
   * 인프런 <스프링 Data JPA> - 백기선
   * <자바 ORM 표준 JPA 프로그래밍> - 김영한

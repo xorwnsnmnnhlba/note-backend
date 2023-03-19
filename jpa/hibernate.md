@@ -29,7 +29,7 @@
 * JPQL(Java Persistence Query Language)
 	* 테이블이 아닌 Entity를 대상으로 한 쿼리.
 	* JPA 구현체(Hibernate)가 JPQL로 작성한 쿼리를 SQL로 변환해서 실행함.
-	* 아래와 같이 EntityManager의 createQuery 메서드의 첫번째 변수에 쿼리를 넣고, 두번째 변수에 해당 타입을 넣어서 TypedQuery 형태로 반환하여 사용함.
+	* 아래와 같이 EntityManager의 createQuery 메서드 첫번째 변수에 쿼리를 넣고, 두번째 변수에 해당 타입을 넣어서 TypedQuery 형태로 반환하여 사용함.
 ```
 TypedQuery<Post> query = entityManager.createQuery("SELECT p FROM Post AS p", Post.class); 
 List<Post> posts = query.getResultList();

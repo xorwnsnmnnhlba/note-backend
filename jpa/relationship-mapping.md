@@ -16,7 +16,7 @@
 <br>
 
 * Event Sourcing
-	* 
+	* 데이터의 현재 상태만 저장하지 않고, 데이터에 수행된 모든 작업들을 하나하나 기록하는 것을 의미함.
 
 <br>
 
@@ -93,3 +93,5 @@ public class Account {
 
 * 참고
   * 인프런 <스프링 Data JPA> - 백기선
+	* https://jaegukim.github.io/posts/joincolumn-vs-mappedby-orm%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%A0%EB%95%8C-%EC%A3%BC%EC%9D%98%ED%95%A0%EC%A0%90/
+	* https://learn.microsoft.com/ko-kr/azure/architecture/patterns/event-sourcing
