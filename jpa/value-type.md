@@ -90,6 +90,44 @@ public class Account {
     * Aggregate Mapping을 수행할 때, 수행 대상이 되는 클래스에 사용.
   * @Embedded
     * @Embeddable 애노테이션이 들어간 클래스의 인스턴스를 멤버로 선언할 때 사용.
+  * @EmbeddedId
+    * @Embeddable 애노테이션이 들어간 클래스의 인스턴스를 주 키로 매핑할 때 사용.
+  * @AttributeOverride
+    * 기본 자료형이나 Wrapper 클래스가 아닌 클래스에 대한 인스턴스를 멤버로 선언할 때 사용.
+    * name 속성을 이용하여 해당 클래스의 멤버로 매핑할 수 있으며, column 속성을 이용하여 DB 컬럼과 매핑 가능함.
+
+```
+@Entity(name = "comments")
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class Comment {
+
+    @EmbeddedId
+    private CommentId id;
+
+    @AttributeOverride(name = "id", column = @Column(name = "postid"))
+    private PostId postId;
+
+    private String author;
+
+    private String content;
+
+    public Comment(PostId postId, String author, String content) {
+        this.id = CommentId.generate();
+        this.postId = postId;
+        this.author = author;
+        this.content = content;
+    }
+
+    public void update(String content) {
+        this.content = content;
+    }
+
+}
+```
 
 <br>
 
