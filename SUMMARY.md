@@ -50,3 +50,8 @@
 * [Value Type](/jpa/value-type.md)
 * [Relationship Mapping](/jpa/relationship-mapping.md)
 * [Spring Data JPA](/jpa/spring-data-jpa.md)
+
+## DDD(Domain-Driven Design)
+
+* [DDD](/domain-driven-design/ddd.md)
+* [Strategic Design](/domain-driven-design/strategic-design.md)

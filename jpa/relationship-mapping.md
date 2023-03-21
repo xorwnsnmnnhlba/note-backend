@@ -7,7 +7,7 @@
 
 <br>
 
-* 도메인 중심 설계(DDD, Domain Driven Design)에서의 Aggregate
+* 도메인 주도 설계(DDD, Domain Driven Design)에서의 Aggregate
 	* 단일 책임을 수행할 수 있는 엔티티의 집합 단위.
 	* 임의의 CRUD 작업이 이루어질 때 하나의 Aggregate에 속한 여러 엔티티들이 동시에 영향을 받게 됨.
 	* 설계 단계에서 여러 개의 엔티티를 가지고 Aggregate를 올바르게 잘 구성해야 하며, 이것이 바로 도메인 중심 설계의 핵심이라 볼 수 있음.
