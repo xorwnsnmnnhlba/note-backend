@@ -15,9 +15,10 @@
 
 * VO(Value Object)
   * 하나의 도메인 모델에 여러 값을 가지기 위한 목적으로 만들어진 객체.
+  * 엔티티와 다르게 고유 식별자를 가지지 않기 때문에, 가지고 있는 여러 속성값에 따른 동등성 확인을 위해 사용함.
   * 같은 값들을 가진 VO의 논리적 동등성을 비교하기 위해 equals 메서드와 hashcode 메서드를 이용하여 비교할 수 있음.
     * equals 메서드와 hashcode 메서드를 오버라이딩하여 직접 구현해도 되지만, Lombok에 있는 @EqualsAndHashCode를 이용하여 간략하게 비교 가능.
-    * 보통 고유값을 가지는 필드에 대해 @EqualsAndHashCode(of = "(고유값)")으로 선언하여 사용.
+    * 보통 불변값을 가지는 필드에 대해 @EqualsAndHashCode(of = "(불변값)")으로 선언하여 사용.
 
 ```
 public class Point {
