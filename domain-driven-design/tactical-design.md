@@ -53,4 +53,5 @@
 
 * 참고
   * https://kalele.io/modeling-aggregates-with-ddd-and-entity-framework/
+  * https://www.inflearn.com/questions/27918/%EB%8F%84%EB%A9%94%EC%9D%B8%EC%84%A4%EA%B3%84-%EA%B4%80%EB%A0%A8-%EC%A7%88%EB%AC%B8%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4
   * <도메인 주도 개발 시작하기: DDD 핵심 개념 정리부터 구현까지> - 최범균
