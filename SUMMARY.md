@@ -56,3 +56,7 @@
 * [DDD](/domain-driven-design/ddd.md)
 * [Strategic Design](/domain-driven-design/strategic-design.md)
 * [Tactical Design](/domain-driven-design/tactical-design.md)
+
+## Hexagonal Architecture
+
+* [SOLID](/hexagonal-architecture/solid.md)
