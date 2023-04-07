@@ -1,11 +1,11 @@
 # SOLID
 
-* SOLID 원칙
+### SOLID 원칙
   * 객체지향 프로그래밍 및 설계에 필요한 기본 원칙. 아래 다섯가지로 구분할 수 있음.
 
 <br>
 
-* 단일 책임 원칙(SRP, Single Responsibility Principle)
+### 단일 책임 원칙(SRP, Single Responsibility Principle)
   * 객체지향 프로그래밍의 생산성을 높이기 위해 클래스가 제공하는 서비스는 오직 하나의 책임을 수행하는데 집중되어야 함.
     * 모종의 이유로 하나의 클래스를 변경해야할 때, 그 이유는 오직 하나뿐이어야 함.
   * 책임의 분배를 통한 클래스별 역할구분을 확실하게 함으로써, 코드의 가독성을 올리고 유지보수성을 향상시킬 수 있음.
@@ -17,7 +17,7 @@
 
 <br>
 
-* 개방-폐쇄 원칙(OCP, Open-Closed Principle)
+### 개방-폐쇄 원칙(OCP, Open-Closed Principle)
   * 소프트웨어를 구성하는 요소(모듈, 클래스, 메서드 등등)들은 확장에는 열려있고, 변경에는 닫혀있어야 한다는 원리.
   * Java에서는 인터페이스(Interface)를 이용하여 OCP에 따른 구현을 가능하게 함.
   * 추상화와 다형성을 추구하여 객체지향 프로그래밍이 주는 장점을 누릴 수 있음.
@@ -28,20 +28,20 @@
 
 <br>
 
-* 리스코프 치환 원칙(LSP, Liskov Substitution Principle)
+### 리스코프 치환 원칙(LSP, Liskov Substitution Principle)
 
 
 <br>
 
-* 인터페이스 분리 원칙(ISP, Interface Segregation Principle)
+### 인터페이스 분리 원칙(ISP, Interface Segregation Principle)
 
 
 <br>
 
-* 의존관계 역전 원칙(DIP, Dependency Inversion Principle)
+### 의존관계 역전 원칙(DIP, Dependency Inversion Principle)
 
 
 <br>
 
-* 참고
-  * <한번 읽으면 두번 깨닫는 객체지향 프로그래밍> - 김동헌
+### 참고
+* <한번 읽으면 두번 깨닫는 객체지향 프로그래밍> - 김동헌
