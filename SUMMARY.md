@@ -60,3 +60,4 @@
 ## Hexagonal Architecture
 
 * [SOLID](/hexagonal-architecture/solid.md)
+* [Hexagonal Architecture](/hexagonal-architecture/solid.md)
