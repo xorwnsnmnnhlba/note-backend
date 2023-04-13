@@ -61,3 +61,8 @@
 
 * [SOLID](/hexagonal-architecture/solid.md)
 * [Hexagonal Architecture](/hexagonal-architecture/solid.md)
+
+
+## Spring Security
+
+* [Application Level Security](/spring-security/application-level-security.md)
