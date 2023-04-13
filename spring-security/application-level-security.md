@@ -46,6 +46,62 @@
 
 ### Interceptor vs Filter in Spring
 
+<figure><img src="./images/filter-interceptor.png" alt=""></figure>
+
+* Filter
+  * J2EE 표준스펙에 있는 기능으로써, 들어온 요청과 처리가 이루어진 응답을 걸러내는 역할을 수행함.
+  * Spring MVC의 핵심이라 할 수 있는 DispatcherServlet으로 요청을 전달하기 전에 부가적인 작업을 처리할 수 있는 기능 제공.
+  * Spring과 무관하게 웹 컨텍스트(Web Context)에서 동작함.
+  * javax.servlet.Filter 인터페이스를 구현해야 하며, 아래와 같이 세가지 메서드를 가지고 있음.
+    * init(filterConfig): Filter 인스턴스를 초기화하고 서비스에 추가할 때 사용함.
+    * doFilter(request, response, chain): HTTP 요청이 DispatcherServlet에 전달되기 전, 웹 컨테이너에 의해 실행됨. 여기서 FilterChain을 이용하여 다음 대상으로 요청을 전달함.
+    * destroy(): Filter 인스턴스를 제거하고 해당하는 리소스를 반환할 때 사용함.
+```
+public interface Filter {
+
+    public default void init(FilterConfig filterConfig) throws ServletException {}
+    
+    public void doFilter(ServletRequest request, ServletResponse response,
+            FilterChain chain) throws IOException, ServletException;
+            
+    public default void destroy() {
+
+    }
+
+}
+```
+* Interceptor
+  * Spring에서 제공하는 기술로써, DispatcherServlet에서 컨트롤러(Controller)를 호출하기 전후에 요청을 가로채서 응답을 가공할 수 있는 기능 제공.
+  * Filter와 다르게 Spring Context 내부에서 동작함.
+  * 핸들러 매핑에 설정할 수 있는 인터셉터인 HandlerInterceptor 인터페이스를 구현해야 하며, 아래와 같이 세가지 메서드를 가지고 있음.
+    * preHandle(request, response, handler)
+      * 핸들러 실행 전에 호출되며, 핸들러에 대한 정보를 사용할 수 있기 때문에 Filter에 비해 보다 세밀한 로직 구현 가능함.
+      * 요청 데이터 전처리가 필요할 때 주로 사용.
+    * postHandle(request, response, modelAndView)
+      * 핸들러 실행이 끝나고 DispatcherServlet이 뷰를 렌더링하기 전에 호출됨. View에 전달할 추가 모델 객체를 노출시킬 수 있음.
+      * 후처리 작업이 필요할 때 주로 사용.
+      * 인터셉터 역순으로 호출되며, 비동기적인 요청 처리 시에는 호출되지 않음.
+    * afterCompletion(request, response, handler, ex)
+      * 요청 처리가 완전히 끝난 후(뷰 렌더링 끝난 후)에 호출됨. preHandle 메서드에서 true를 리턴한 경우에만 호출됨.
+      * postHandle 메서드와 마찬가지로 체인의 각 인터셉터에서 역순으로 호출되므로 첫 번째 인터셉터가 가장 마지막에 호출됨.
+```
+public interface HandlerInterceptor {
+
+    default boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        return true;
+    }
+    
+    default void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable ModelAndView modelAndView) throws Exception {
+
+    }
+        
+    default void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception ex) throws Exception {
+
+    }
+        
+}
+```
+
 <br>
 
 ### 암호화와 복호화
@@ -60,3 +116,4 @@ Salt가 필요한 이유
 * https://auth0.com/intro-to-iam/authentication-vs-authorization
 * https://erwinousy.medium.com/쿠키-vs-로컬스토리지-차이점은-무엇일까-28b8db2ca7b2
 * https://velog.io/@ejchaid/localstorage-sessionstorage-cookie의-차이점
+* https://dev-coco.tistory.com/173
