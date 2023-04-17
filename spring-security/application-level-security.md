@@ -122,7 +122,7 @@ public interface HandlerInterceptor {
 
 <br>
 
-### 참고
+#### 참고
 * https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API
 * https://auth0.com/intro-to-iam/authentication-vs-authorization
 * https://erwinousy.medium.com/쿠키-vs-로컬스토리지-차이점은-무엇일까-28b8db2ca7b2

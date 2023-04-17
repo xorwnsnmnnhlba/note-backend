@@ -34,6 +34,14 @@
 
 <br>
 
+### PostgreSQL
+* 객체-관계형 DBMS(ORDBMS)로써, 순수 RDBMS인 MariaDB와는 다르게 데이터를 하나의 객체로 저장할 수 있음. 따라서, 테이블 상속을 지원함.
+* 인프라 구성이 MySQL에 비해 다소 까다롭고 진입장벽이 높은 편이나, 복잡한 쿼리를 사용했을 때 발휘되는 성능상의 이점으로 인해 점유율이 꾸준하게 높아지는 추세.
+* 전반적인 CRUD 성능이 MariaDB에 비해 다소 느린 편. UPDATE문 수행 시 MariaDB와는 다르게 DELETE -> INSERT 과정을 거쳐서 진행.
+* 간단한 쿼리가 주로 필요한 경우 MariaDB를 사용하며, 복잡한 쿼리가 많고 INSERT 쿼리가 많은 경우 PostgreSQL을 사용하는게 좋음.
+
+<br>
+
 ### 데이터베이스 언어
 * 데이터 정의 언어(DDL, Data Definition Language): 데이터베이스 명세라 할 수 있는 스키마를 정의할 때 사용하는 언어.
 	* CREATE: 데이터베이스, 테이블 생성
@@ -123,3 +131,4 @@ LEFT OUTER JOIN r2 ON r1.a1 = r2.a2;
 #### 참고
 * https://terms.tta.or.kr/dictionary/dictionaryView.do?subject=%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4
 * https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model
+* https://aws.amazon.com/ko/compare/the-difference-between-mysql-vs-postgresql/
