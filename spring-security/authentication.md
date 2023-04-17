@@ -130,8 +130,11 @@ public class WebSecurityConfig {
   * 사용자를 지정하는 Principal과 권한을 지정하는 GrantAuthority를 제공하는 인터페이스.
   * SecurityContext 인터페이스에서 제공하는 setAuthentication(authentication) 메서드를 통해 SecurityContext에 인증 설정 가능하며, getAuthentication 메서드를 통해 Authentication 구현체 인스턴스를 가져올 수 있음.
 
+<figure><img src="./images/SecurityContextHolder.png" alt=""></figure>
+
 <br>
 
 #### 참고
 * https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-OAuth-20-%EA%B0%9C%EB%85%90-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC
 * https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter
+* 인프런 <스프링 시큐리티> - 백기선

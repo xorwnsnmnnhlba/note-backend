@@ -66,3 +66,4 @@
 ## Spring Security
 
 * [Application Level Security](/spring-security/application-level-security.md)
+* [Authentication](/spring-security/authentication.md)
