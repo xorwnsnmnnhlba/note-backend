@@ -67,3 +67,5 @@
 
 * [Application Level Security](/spring-security/application-level-security.md)
 * [Authentication](/spring-security/authentication.md)
+* [Login & Logout, Sign-Up](/spring-security/login-logout-signup.md)
+* [JWT, Authority](/spring-security/jwt-authority.md)
