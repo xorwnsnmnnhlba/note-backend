@@ -69,3 +69,7 @@
 * [Authentication](/spring-security/authentication.md)
 * [Login & Logout, Sign-Up](/spring-security/login-logout-signup.md)
 * [JWT, Authority](/spring-security/jwt-authority.md)
+
+## File Upload
+
+* [File Upload](/file-upload/file-upload.md)
