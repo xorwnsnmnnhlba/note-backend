@@ -58,15 +58,15 @@ dependencies {
 	* 그렇지만 테스트 목적으로 사용하기 위한 DB를 운영하는 것은 번거롭기 때문에, 이를 보완할 수 있는 Tool의 필요성이 대두됨.
 	* 실제 운영환경에 더 가까운 테스트 수행이 가능해짐.
 	* 기존 H2 Database에 비해 조금 느리게 수행됨.
-	* TestContainers에서 junit-jupiter, 운영용 DB 관련 의존성을 추가해야 하며, 관련 구성을 진행해야 함.
+	* Testcontainers에서 junit-jupiter, 운영용 DB 관련 의존성을 추가해야 하며, 관련 구성을 진행해야 함.
 	* Docker Daemon이 설치되어있어야 하며, 싱글턴 패턴을 이용하여 모든 테스트에서 오직 한개의 컨테이너만 사용하도록 함.
-	* CI/CD Pipeline이 구성된 원격 Repository에 TestContainers를 가지고 테스트를 수행한 프로젝트를 올리는 경우, 그에 맞게 유의하여 구성해줘야 함.
+	* CI/CD Pipeline이 구성된 원격 Repository에 Testcontainers를 가지고 테스트를 수행한 프로젝트를 올리는 경우, 그에 맞게 유의하여 구성해줘야 함.
 ```
 build.gradle
 
 dependencies {
-    testImplementation 'org.testcontainers:junit-jupiter:1.17.6'
-    testImplementation 'org.testcontainers:mysql:1.17.6'
+    testImplementation 'org.testcontainers:junit-jupiter:1.18.0'
+    testImplementation 'org.testcontainers:mysql:1.18.0'
 }
 
 application-test.yml

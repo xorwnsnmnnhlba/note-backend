@@ -22,3 +22,5 @@
 <br>
 
 #### 참고
+* https://reflectoring.io/spring-hexagonal/
+* https://wkrzywiec.medium.com/ports-adapters-architecture-on-example-19cab9e93be7

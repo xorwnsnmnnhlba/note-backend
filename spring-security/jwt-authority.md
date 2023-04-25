@@ -66,6 +66,8 @@ public String user() {
 * https://docs.spring.io/spring-security/reference/servlet/authorization/architecture.html
 * 인프런 <스프링 시큐리티> - 백기선
 
+<br>
+
 #### 배워가는 것들
 * JWT에 대한 개괄적인 개념 파악.
 * @EnableMethodSecurity, @Secured를 사용하여 특정 권한에 따른 인가처리.
