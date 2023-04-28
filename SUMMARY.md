@@ -62,6 +62,7 @@
 
 * [SOLID](/hexagonal-architecture/solid.md)
 * [Hexagonal Architecture](/hexagonal-architecture/hexagonal-architecture.md)
+* [<우아한 객체지향> 세미나](/hexagonal-architecture/woowahan-oop-seminar.md)
 
 
 ## Spring Security
