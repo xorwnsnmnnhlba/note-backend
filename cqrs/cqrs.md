@@ -46,10 +46,12 @@
 
 ### Event Sourcing
 * 프로그램에서 발생되는 이벤트의 처리 과정을 하나하나 연속적으로 저장하는 기법.
+* 이벤트가 발생한 일련의 기록들을 하나하나 저장하다보면 용량 이슈가 발생할 수 있으므로, 이를 스냅샷(Snapshot) 형태로 중간중간 나눠서 저장함. 
 * 특정 작업내역에 대한 조회 시, 성능상의 이점을 얻기 위해 CQRS와 함께 사용함.
 
 #### 참고
 * https://martinfowler.com/bliki/CommandQuerySeparation.html
+* https://learn.microsoft.com/ko-kr/azure/architecture/data-guide/relational-data/online-analytical-processing
 
 <br>
 
