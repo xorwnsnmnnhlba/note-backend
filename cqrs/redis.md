@@ -3,6 +3,7 @@
 ### Redis
 * Key-Value 형태의 비정형 데이터를 메모리에 저장하는 인메모리(In-Memory) 데이터베이스.
 * DB, Cache, Streaming Engine, Message Broker로 활용되고 있음.
+* 데이터 입출력을 빠르게 처리할 수 있을 때 유용하게 사용할 수 있음. 이와 반대로 다량의 데이터를 한번에 읽고 쓰는건 지양해야 함.
 * HA 구성을 위해 Master-Slave 방식의 Redis Sentinel과 Multi-Master, Multi-Slave 방식의 Redis Cluster를 구축할 수 있음.
 * 아래와 같이 Docker Container 형태로 설치 가능.
   * 환경설정에 필요한 redis.conf 파일은 GitHub Redis 공식 Repository에 있는 파일 이용.
@@ -42,6 +43,7 @@ $ ./docker-run.sh
 * 디스크가 아닌 메모리에 데이터를 보관하고 있는 데이터베이스.
 * 디스크에 저장되는 데이터베이스에 비해 데이터 접근 및 처리에 있어 월등히 빠른 속도를 가짐.
 * 다만, 갑작스러운 장애 발생 시 메모리에 있는 데이터들이 모두 사라질 수 있으므로 메모리에 올라간 데이터를 주기적으로 백업해줘야 함. 대부분의 제품에서 데이터를 저장하는 주기를 설정할 수 있음.
+* 데이터 입출력을 빠르게 처리할 수 있을 때 유용하게 사용할 수 있음. 이와 반대로 다량의 데이터를 한번에 읽고 쓰는건 지양해야 함.
 * 대표적으로 Redis, Zookeeper, Memcached, H2 등등이 있음.
 
 <br>

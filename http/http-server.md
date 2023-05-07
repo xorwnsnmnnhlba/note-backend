@@ -29,3 +29,7 @@
 
 #### 참고
 * https://homoefficio.github.io/2017/02/19/Blocking-NonBlocking-Synchronous-Asynchronous/
+
+#### 배워가는 것들
+* Blocking, Non-Blocking 개념에 대해 익힐 수 있었다.
+* 전통적인 방식의 서버 모듈 구현시 사용했었던 개념들에 대해 익힐 수 있었다.
