@@ -22,3 +22,6 @@
 
 #### 참고
   * https://learn.microsoft.com/ko-kr/azure/architecture/best-practices/api-design#organize-the-api-design-around-resources
+
+#### 배워가는 것들
+* 임의의 리소스에 대한 API 구현 시에 사용하는 Collection Pattern에 대해 익힐 수 있었다. 원리를 잘 익혀서 URL 구현 시 실수가 없도록 해야 할 것이다.
