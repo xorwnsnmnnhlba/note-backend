@@ -132,3 +132,12 @@ LEFT OUTER JOIN r2 ON r1.a1 = r2.a2;
 * https://terms.tta.or.kr/dictionary/dictionaryView.do?subject=%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4
 * https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model
 * https://aws.amazon.com/ko/compare/the-difference-between-mysql-vs-postgresql/
+
+#### 배워가는 것들
+* 백엔드 모듈에서 사용하는 영속성 데이터를 저장 및 관리하기 위한 기본 원리에 대해 탐구할 수 있었다.
+	* 데이터베이스에 대한 개념과 주요 특징에 대해 익힐 수 있었다.
+	* DBMS에 대한 중요 개념을 하나하나 익힐 수 있었다.
+	* 데이터 모델, 관계대수에 대한 중요 개념을 익힐 수 있었다.
+* 최근들어 각광받는 PostgreSQL에 대한 주요 특징을 익힐 수 있었다. MySQL 혹은 MariaDB뿐만 아니라, PostgreSQL에 대해서도 친숙해질 수 있도록 잘 익혀나가야 할 것이다.
+* 프로그램 설계 단계에서 ER Model을 잘 활용할 수 있도록 한다. "말이 되는 설계"가 될 수 있도록 꾸준히 단련시켜야 할 것이다.
+* 데이터베이스 정규화에 대한 특징을 개략적으로 정리할 수 있었다.
