@@ -67,3 +67,7 @@ public record Account(String email, Integer birthYear) {
 
 ### ORM(Object-Relational Mapping)
 * 객체와 관계형 데이터베이스(RDBMS)를 매핑하는 기술.
+
+#### 배워가는 것들
+* DTO와 JavaBeans에 대한 기본적인 내용을 익힐 수 있었다.
+* Java Record에 대해 익힐 수 있었다. 최근들어 DTO 구현시 자주 사용하기 때문에 익숙해질 때까지 계속 반복하여 내 것으로 만들어나가야 할 것이다.

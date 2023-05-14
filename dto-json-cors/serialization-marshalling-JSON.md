@@ -34,9 +34,20 @@
   * Frontend에서 데이터 전송 시 JSON.stringify를 이용하여 직렬화 후 Backend로 넘겨주게 됨.
   * Backend로부터 전송된 데이터를 받아서 사용할 때는 JSON.parse를 이용하여 역직렬화 후 사용함.
 
+<br>
+
 ### Jackson ObjectMapper
 * Java에서 인스턴스를 JSON 형태의 데이터로 변환(직렬화) 및 그 반대로 변환(역직렬화)할 수 있는 기능을 제공해주는 클래스.
 * Spring Boot의 경우, 기본적으로 spring-boot-starter-web에서 DTO를 JSON 형식의 데이터로 자동 변환해주는 기능을 지원함.
 
+<br>
+
 ### @JsonProperty
 * ObjectMapper를 이용하여 DTO를 JSON 데이터로 변환 시, 전달이 이루어지는 JSON 데이터 Key가 Dto의 필드와 다른 경우 사용하는 애노테이션.
+
+<br>
+
+#### 배워가는 것들
+* 백엔드 모듈을 구현할 때 데이터 흐름을 머릿속으로 잘 생각하며 구현하기 위해 필요한 개념들을 학습했다.
+  * 메시지를 이용하여 백엔드와 프론트엔드 간 통신을 할 때 가장 많이 사용하는 포맷인 JSON에 대해 학습했다.
+  * 데이터를 주고받을 때 사용하는 개념이라 할 수 있는 직렬화와 Marshalling에 대해 학습했다.

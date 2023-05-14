@@ -80,7 +80,7 @@ public class Account {
   * 생성 전략(strategy)과 생성기(generator)를 설정할 수 있음.
     * 기본 전략은 AUTO이며, 사용하는 DB에 따라 적절한 전략을 선택할 수 있음.
 * @Column
-  * @Entity 필드에 들어가는 기본 속성(생략 가능). 아래 속성들을 부여할 수 있음.
+  * @Entity 필드에 들어가는 기본 속성(변수명과 같은 컬럼명으로 구성하는 경우, 생략 가능). 아래 속성들을 부여할 수 있음.
     * unique - 유일한 값
     * nullable - NULL 가능여부
     * length - 길이
@@ -95,6 +95,10 @@ public class Account {
 * @AttributeOverride
   * 기본 자료형이나 Wrapper 클래스가 아닌 클래스에 대한 인스턴스를 멤버로 선언할 때 사용.
   * name 속성을 이용하여 해당 클래스의 멤버로 매핑할 수 있으며, column 속성을 이용하여 DB 컬럼과 매핑 가능함.
+* @MappedSuperclass
+  * 객체 입장에서 공통으로 매핑할 정보가 있을 때 사용.
+  * 공통으로 매핑할 정보를 필드로 구성하여 추상 클래스 형태로 만들고, 그 클래스를 상속받는 형태로 사용함.
+  * 테이블과 매핑되지 않으며, 선언한 클래스에 있는 필드들에 대한 정보만 제공함.
 
 ```
 @Entity(name = "comments")
@@ -124,6 +128,38 @@ public class Comment {
 
     public void update(String content) {
         this.content = content;
+    }
+
+}
+
+
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class CommentId extends EntityId {
+
+    public CommentId(String value) {
+        super(value);
+    }
+
+}
+
+
+@Embeddable
+@MappedSuperclass
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@EqualsAndHashCode
+public abstract class EntityId implements Serializable {
+
+    @Column(name = "id")
+    private String value;
+
+    protected static String newTsid() {
+        return TSID.Factory.getTsid().toString();
+    }
+
+    @Override
+    public String toString() {
+        return value;
     }
 
 }
