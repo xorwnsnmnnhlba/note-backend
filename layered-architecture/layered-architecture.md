@@ -103,3 +103,8 @@ implementation 'com.github.f4b6a3:tsid-creator:5.2.0'
 * https://www.oreilly.com/library/view/software-architecture-patterns/9781491971437/ch01.html
 * https://github.com/ulid/spec
 * https://github.com/f4b6a3/tsid-creator
+
+#### 배워가는 것들
+* 각각의 관심사에 따른 역할 분리를 위해 필요한 개념들에 대해 학습했다.
+* 관심사의 분리를 수행함으로써 얻게 되는 장점에 대해 익힐 수 있었다.
+  * 책상 위에 있는 물건들을 손쉽게 가져오기 위해 각각의 물건들을 종류별로 구분하여 정리한다. 관심사의 분리도 이와 마찬가지다. 다양한 기능을 가진 프로그램을 구현하기 위해서는 이러한 역할분리가 필수라는 것을 알게 되었다.

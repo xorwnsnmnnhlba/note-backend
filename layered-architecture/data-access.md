@@ -35,3 +35,7 @@
 * https://www.oreilly.com/library/view/software-architecture-patterns/9781491971437/ch01.html
 * https://github.com/ulid/spec
 * https://github.com/f4b6a3/tsid-creator
+
+#### 배워가는 것들
+* 프로그램에서 사용하는 데이터의 영속화를 위해 필요한 개념인 DAO에 대해 학습했다.
+* DAO를 통해 가져온 데이터를 분류하기 위해 필요한 자료구조인 List와 Map에 대해 학습했다. Stream과 함께 자주 쓰일테니, 막힘없이 잘 활용할 수 있도록 해야겠다.
