@@ -39,3 +39,8 @@ List<Post> posts = query.getResultList();
 
 #### 참고
 * 인프런 <스프링 Data JPA> - 백기선
+
+#### 배워가는 것들
+* JPA 구현체인 Hibernate에 대해 익힐 수 있었다.
+* EntityManager, EntityManagerFactory에 대해 익힐 수 있었다.
+* Spring Data JPA를 사용하게 된다면, 위의 것들을 있는그대로 직접 사용하는 일은 드물 것이다. 그렇지만, 어떠한 원리로 돌아가는지 잘 살펴볼 필요가 있다.

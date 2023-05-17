@@ -85,3 +85,9 @@ public interface PersonRepository extends JpaRepository<Person, String> {
 
 #### 참고
 * 인프런 <스프링 Data JPA> - 백기선
+
+#### 배워가는 것들
+* Spring Data JPA를 사용했을 때 주는 이점에 대해 파악할 수 있었다.
+* JpaRepository가 제공해주는 기능이 어떠한 건지 알아볼 수 있었다.
+* DAO와 Repository에 대한 개념상의 차이를 파악할 수 있었다.
+* @Transactional에 대해 파악할 수 있었다. 보통 Service 계층에서 선언하게 되는데, 제공되는 옵션을 잘 활용하여 성능상의 이점을 줄 수 있도록 해야할 것이다.

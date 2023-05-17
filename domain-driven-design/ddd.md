@@ -22,3 +22,8 @@
 #### 참고
 * https://medium.com/crossplatformkorea/%EB%8F%84%EB%A9%94%EC%9D%B8-%EC%A3%BC%EB%8F%84-%EC%84%A4%EA%B3%84-domain-driven-design-in-real-project-1-%EB%8F%84%EB%A9%94%EC%9D%B8-83a5e31c5e45
 * https://www.techopedia.com/definition/27913/technical-debt
+
+#### 배워가는 것들
+* 도메인 주도 설계에 대한 개략적인 내용들을 파악할 수 있었다.
+  * 프로그램 설계 시 "복잡다단한 도메인들의 실타래를 어떻게 풀어가야 하는지??" 에 대한 해법이 될 수 있는 개념들을 파악할 수 있었다.
+* 기술 부채에 대해 정리할 수 있었다. 개발 실무자 입장에서 기술 부채를 줄이기 위해서는 결국 프로그램 모듈들에 대한 재사용성을 높여야 할 것이다. 완벽하게 막을수는 없지만, 이를 줄일 수 있는 노력을 계속해서 해나가야 할 것이다.

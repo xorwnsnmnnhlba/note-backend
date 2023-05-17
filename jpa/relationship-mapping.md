@@ -43,7 +43,6 @@
 		* 생략이 이루어진 경우, 외래 키가 (선언이 이루어진 필드에 대한 클래스명)_(@Id 애노테이션에 해당하는 필드명)으로 구성됨.
 
 ```
-
 @Entity 
 @Getter 
 @Setter 
@@ -95,3 +94,8 @@ public class Account {
 * 인프런 <스프링 Data JPA> - 백기선
 * https://jaegukim.github.io/posts/joincolumn-vs-mappedby-orm%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%A0%EB%95%8C-%EC%A3%BC%EC%9D%98%ED%95%A0%EC%A0%90/
 * https://learn.microsoft.com/ko-kr/azure/architecture/patterns/event-sourcing
+
+#### 배워가는 것들
+* 엔티티 간 관계 설정에 필요한 필수 개념들을 학습했다.
+* 관계 설정 시 @OneToMany, @ManyToOne 등등을 사용할텐데, 애그리거트를 묶는 범위를 어떻게 잡아야 할 것인지를 잘 생각해야 할 것이다.
+* 데이터 조회 시에 발생하는 N+1 problem을 어떻게 잡아낼 수 있을지에 대해 익힐 수 있었다.
