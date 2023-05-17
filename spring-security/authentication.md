@@ -138,3 +138,9 @@ public class WebSecurityConfig {
 * https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-OAuth-20-%EA%B0%9C%EB%85%90-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC
 * https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter
 * 인프런 <스프링 시큐리티> - 백기선
+
+#### 배워가는 것들
+* 인증 과정에서 사용하는 식별자에 대해 익힐 수 있었다. Username이라는 키워드를 사용하는 이유에 대해서도 파악해볼 수 있었다.
+* OAuth 2.0과 Bearer Token에 대해 학습할 수 있었다. 이러한 기술들이 어떻게 사용되는지, 어떻게 구현할 수 있는지에 대해 익힐 수 있었다.
+* @Configuration, @EnableWebSecurity 애노테이션을 이용한 SecurityFilterChain 구현체 구성방법을 익힐 수 있었다.
+* OncePerRequestFilter에서 제공해주는 doFilterInternal 메서드 활용 방법을 익힐 수 있었다.

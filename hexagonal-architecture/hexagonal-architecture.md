@@ -24,3 +24,7 @@
 #### 참고
 * https://reflectoring.io/spring-hexagonal/
 * https://wkrzywiec.medium.com/ports-adapters-architecture-on-example-19cab9e93be7
+
+#### 배워가는 것들
+* Hexagonal Architecture에 대한 개념을 익힐 수 있었다. 생소한 아키텍처이기에, 각각의 용어에 집중하여 학습했다.
+* 프로그램 모듈 설계 및 구현 시, Layered Architecture, DDD와 공존하여 사용할 수 있는 방안을 계속해서 연구해나가야 할 것이다.

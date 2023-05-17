@@ -69,6 +69,6 @@ public String user() {
 <br>
 
 #### 배워가는 것들
-* JWT에 대한 개괄적인 개념 파악.
-* @EnableMethodSecurity, @Secured를 사용하여 특정 권한에 따른 인가처리.
+* JWT에 대한 개괄적인 개념을 파악할 수 있었다.
+* @EnableMethodSecurity, @Secured를 사용하여 특정 권한에 따른 인가처리 방법을 확인할 수 있었다.
 * @EnableGlobalMethodSecurity와 RoleHierarchyImpl, SecurityExpressionHandler를 이용하여 관리자/사용자 간 역할(Role) 계층 구현도 가능하지만, @EnableMethodSecurity를 사용할 경우 RoleHierarchy 포팅이 안되는 것으로 알고 있음. AccessDecisionVoter를 사용해보았으나 아직 명확한 방법을 찾지 못함. 추후 확인 필요.

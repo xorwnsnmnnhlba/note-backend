@@ -119,6 +119,7 @@ public interface HandlerInterceptor {
 * Salt가 필요한 이유
   * 특정 평문에 대한 암호문 유추를 하지 못하도록 평문에 임의의 데이터를 추가하는 작업이 필요함.
   * 음식에 소금을 살짝 가미함으로써 그 감칠맛을 살리듯이, 출력값 유추를 불가능하게 하기 위한 목적을 달성할 수 있어야 함.
+* 완벽에 가까운 IT 시스템 보안을 추구하기 위해서는 단순히 시스템에서 오가는 데이터의 암호화만 생각할게 아니라, 암호문을 평문으로 풀어내는 키의 관리도 잘 이루어져야 함.
 
 <br>
 
@@ -129,3 +130,13 @@ public interface HandlerInterceptor {
 * https://velog.io/@ejchaid/localstorage-sessionstorage-cookie의-차이점
 * https://dev-coco.tistory.com/173
 * 인프런 <스프링 시큐리티> - 백기선
+
+#### 배워가는 것들
+* 정보보안의 핵심개념이라 할 수 있는 인증/인가에 대해 학습했다.
+* 인증/인가 관련 기능 구현(ex. 로그인, 로그아웃, 로그인 시 Remember-Me 기능 구현) 시, HTTP의 Stateless한 특성을 잘 파악해야 할 것이다.
+* Cookie와 WebStorage에 대해 학습했다.
+  * 사실 WebStorage에 대해서는 생소한 부분들이 적지않게 있었다. HTTP를 통한 통신을 수행할 때 WebStorage 사용 비중이 높아지고 있으므로, 잘 숙지해놔야 할 것이다.
+* Filter와 Interceptor의 특징과 차이점에 대해 익힐 수 있었다.
+* HandlerInterceptor 인터페이스를 구현한 클래스를 이용하여 어떻게 인증/인가 관련 기능을 구현할 수 있는지 확인해볼 수 있었다.
+* 암호화와 복호화에 대해 익힐 수 있었다.
+  * 왜 단방향 암호화를 사용해야 하는지, Salt를 왜 사용해야 하는지를 알아볼 수 있었다.

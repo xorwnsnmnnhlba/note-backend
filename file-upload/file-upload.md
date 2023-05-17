@@ -74,9 +74,9 @@ cloudinary:
 <br>
 
 #### 배워가는 것들
-* Spring Boot 내부에서 돌아가는 MultipartFile 동작원리.
-* Cloudinary에 대한 이해.
-* 정적(static) Web 리소스(ex. 이미지, 동영상) 관리에 대한 고찰.
+* Spring Boot 내부에서 돌아가는 MultipartFile 동작원리를 익힐 수 있었다.
+* Cloudinary에 대하여 학습할 수 있었다.
+* 정적(static) Web 리소스(ex. 이미지, 동영상) 관리에 대한 고찰을 해볼 수 있었다.
   * 이미지 크기 조정이 필요한 경우 -> Cloudinary
   * 크기 조정이 필요없는 이미지나 짧은 동영상의 경우 -> Nginx
   * 길이가 긴 동영상의 경우 -> 별도의 Streaming 서버 연동 필요.
