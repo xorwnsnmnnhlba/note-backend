@@ -106,6 +106,9 @@ public interface HandlerInterceptor {
 
 ### 암호화와 복호화
 * 암호화(Encryption): 평문(원래 문장)을 알아보기 어렵게 변환하여 암호문으로 만드는 작업.
+  * 혼돈(Confusion): 암호문에서 키를 알아내기 어렵게 하는 성질. 원래 대상과 다른 대상을 섞어서 원래 대상의 정체를 알아볼 수 없게 함.
+  * 확산(Diffusion): 암호문에서 평문을 알아내기 어렵게 하는 성질. 원래 대상이 암호문 내에서 최대한 퍼지도록 함.
+  * 암호화의 안전성은 혼돈과 확산을 올바르게 달성했는지에 대한 여부로 판단할 수 있음.
 * 복호화(Decryption): 암호문을 평문으로 변환시키는 작업.
 * 단방향 암호화(One-Way Encryption)
   * 평문으로 되돌릴 수 없는 암호화 과정을 의미함(비가역성).
@@ -114,7 +117,7 @@ public interface HandlerInterceptor {
 * 해싱 알고리즘(Hashing Algorithm): 임의의 데이터를 정해진 길이의 데이터로 쪼개어 매핑하는 단방향 함수를 의미함.
 * 암호학적 해시 함수: 해싱 알고리즘의 일종으로써, 입력값이 조금만 바뀌어도 그에 해당하는 출력값이 크게 변하는 특성이 있음. 주요 목적은 아래와 같음.
   1. 역상 저항성(Preimage Resistance): 출력값에 대해 그 값을 생성하는 입력값을 찾기 어려워야 함.
-  2. 제2 역상 저항성(Second Preimage Resisatance): 특정 입력값과 동일한 출력값으로 변환되는 다른 입력값을 찾을 수 없어야 함.
+  2. 제2 역상 저항성(Second Preimage Resistance): 특정 입력값과 동일한 출력값으로 변환되는 다른 입력값을 찾을 수 없어야 함.
   3. 충돌 저항성(Collision Resistance): 동일한 출력값으로 변환되는 두 개의 입력값을 찾을 수 없어야 함. 제2 역상 저항성과 유사하나, 암호학적으로 주어진 조건에 대한 차이가 미묘하게 존재함.
 * Salt가 필요한 이유
   * 특정 평문에 대한 암호문 유추를 하지 못하도록 평문에 임의의 데이터를 추가하는 작업이 필요함.
@@ -130,6 +133,7 @@ public interface HandlerInterceptor {
 * https://velog.io/@ejchaid/localstorage-sessionstorage-cookie의-차이점
 * https://dev-coco.tistory.com/173
 * 인프런 <스프링 시큐리티> - 백기선
+* <인크립션> - 김덕수, 이석우
 
 #### 배워가는 것들
 * 정보보안의 핵심개념이라 할 수 있는 인증/인가에 대해 학습했다.
