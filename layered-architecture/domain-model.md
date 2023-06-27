@@ -2,6 +2,7 @@
 
 ### 도메인 모델(Domain Model)
 * 특정 비즈니스에 대한 모든 지식을 의미하는 도메인을 표현하는 개념적 모델.
+* 도메인 계층을 구현할 때 사용하는 객체 모델.
 * 도메인끼리 행위(behavior)를 명확하게 구분하여 각자 맡은 역할에 맞춰 올바르게 위임해야 함.
 * Spring Data JPA에서는 Repository를 이용하여 도메인 모델을 관리하고 있음.
 
@@ -64,7 +65,6 @@ public class Point {
 }
 
 // Lombok 이용
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -80,8 +80,61 @@ public class Point {
 
 <br>
 
+### AttributeConverter
+* Value 타입의 프로퍼티를 DB 컬럼에 매핑할 때 사용하는 인터페이스.
+	* convertToDatabaseColumn(): Value 타입을 DB 컬럼 값으로 변환함.
+	* convertToEntityAttribute(): DB 컬럼 값을 Value로 변환함.
+	* 아래와 같이 AttributeConverter 인터페이스를 구현한 MoneyConverter 클래스를 통해 Money Value 타입을 매핑할 수 있음.
+		* 클래스의 사용을 위해 @Converter 애노테이션으로 선언하며, autoApply(기본값: false) 속성을 true로 지정함으로써 모든 Money 타입의 속성에 대해 MoneyConverter를 자동으로 적용할 수 있음.
+		* 만약 autoApply 속성을 따로 지정하지 않는다면, 아래와 같이 변환하려는 속성에 @Convert 애노테이션을 넣어서 적용해줘야 함.
+```
+@Getter
+@AllArgsConstructor
+@EqualsAndHashCode
+public class Money {
+
+    private int value;
+
+    public Money multiply(int multiplier) {
+        return new Money(value * multiplier);
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(value);
+    }
+
+}
+
+
+public class MoneyConverter implements AttributeConverter<Money, Integer> {
+
+    @Override
+    public Integer convertToDatabaseColumn(Money money) {
+        return money == null ? null : money.getValue();
+    }
+
+    @Override
+    public Money convertToEntityAttribute(Integer value) {
+        return value == null ? null : new Money(value);
+    }
+}
+
+
+public class Order {
+    
+    @Convert(converter = MoneyConverter.class)
+    @Column(name = "total_amounts")
+    private Money totalAmounts;
+
+}
+```
+
+<br>
+
 #### 참고
 * 인프런 <스프링 Data JPA> - 백기선
+* <도메인 주도 개발 시작하기: DDD 핵심 개념 정리부터 구현까지> - 최범균
 
 #### 배워가는 것들
 * 도메인 모델에 대한 기초적인 개념을 익힐 수 있었다.
