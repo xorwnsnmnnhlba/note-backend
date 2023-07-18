@@ -30,6 +30,7 @@
 * UDP(User Datagram Protocol)
   * 비연결성 프로토콜로써, 데이터를 보낼 때 연결을 맺는 작업을 수행하지 않음.
   * 데이터와 패킷 전달 순서가 보장되지 않음.
+  * TCP에 비해 상대적으로 단순하고 빠름.
 
 <br>
 
@@ -77,6 +78,12 @@ try 블록에서 오픈된 리소스는 정상적인 경우나 예외가 발생�
   * URI 형식은 아래와 같다. 여기서 scheme://host:port/path까지 URL이라 볼 수 있다.
     * 서로 다른 쿼리 파라미터를 가지고 요청이 들어오는 경우, 같은 URL이 포함된 서로 다른 URI라 볼 수 있다.
   * <pre class="language-ini"><code class="lang-ini">scheme://host:port/path?query#fragment</code></pre>
+    * scheme: 어떠한 방식으로 리소스에 접근할 것인지에 대한 규칙을 나타내는 프로토콜 사용.
+    * host: 호스트명. 도메인명 혹은 IP 주소를 직접 사용할 수 있음.
+    * port: 접속 포트. 해당 포트가 Well-Known 포트인 경우 생략 가능함.
+    * path: 리소스 경로. 계층적 구조를 가지고 있음.
+    * query: Key-Value 형태로 들어가며, ?로 시작하여 &로 추가 가능함.
+    * fragment: HTML 내부 북마크에 사용하며, 서버에 직접 전송되지 않음.
 
 <figure><img src="./images/uri-url-urn.png" alt=""></figure>
 
@@ -125,6 +132,9 @@ try 블록에서 오픈된 리소스는 정상적인 경우나 예외가 발생�
 
 #### 참고
 * https://stackoverflow.com/questions/176264/what-is-the-difference-between-a-uri-a-url-and-a-urn
+* 인프런 <모든 개발자를 위한 HTTP 웹 기본 지식> - 김영한
+
+<br>
 
 #### 배워가는 것들
 * TCP/UDP, 호스트, 포트 등등의 기초적인 네트워크 이론들을 익힐 수 있었다. 어쩌면 놓칠수도 있는 개념들을 되짚어봄으로써, 네트워크 기초의 중요성을 일깨울 수 있었다.

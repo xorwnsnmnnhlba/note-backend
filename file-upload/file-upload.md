@@ -1,8 +1,7 @@
 # File Upload
 
 ### HTTP multipart/form-data
-* HTML form을 통해 파일을 전송할 때 사용하는 옵션값. form 태그 내에서 enctype 옵션으로 지정할 수 있음.
-  * 위의 form을 통해 POST 방식으로 이루어진 요청의 경우, Header에 있는 Content-type 값으로 multipart/form-data가 전송됨.
+* HTML form을 통해 파일을 전송할 때 사용하는 enctype 옵션값 중 하나. Header에 있는 Content-type 값으로 multipart/form-data가 전송됨.
 * Spring Web MVC를 이용하여 파일을 업로드할 때, DispatcherServlet의 MultipartResolver 인터페이스(구현체: StandardServletMultipartResolver)가 해당 역할을 수행함.
   * HttpServletRequest를 MultipartHttpServletRequest로 변환해주어 요청이 담고 있는 File을 꺼낼 수 있는 API를 제공함.
 
