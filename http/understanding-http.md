@@ -128,8 +128,20 @@
 <br>
 
 ### HTTP 캐싱(Caching)
-* 
-
+* 서버로부터 가져온 리소스를 재활용하게 된다면, 그에 따른 Latency와 Network Traffic을 줄일 수 있게 되며, 브라우저에서의 로딩 속도를 향상시킬 수 있음.
+* HTTP에서는 위와 같은 캐싱 기능을 지원하며, Header에 Cache-Control을 선언하여 사용할 수 있음.
+  * Cache-Control - 캐싱 관련 매커니즘을 설정할 때 사용함.
+    * no-store: 캐시하지 않음.
+    * no-cache: 캐시를 수행하지만, 유효성 확인을 위해 원래(origin) 서버로 요청을 보냄.
+    * private: 단일 사용자만을 위한 캐시 수행 시 사용하며, private 캐시에 적용되어야 함. 기본값으로 적용되어 있음.
+    * public: 응답이 public 캐시에 적용되어도 상관없을 때 사용.
+    * max-age: 캐시를 적용하기 위한 시간 설정(단위: 초(seconds)).
+    * must-revalidate: 오래된 리소스를 사용하기 전에 그 상태를 확인한 후, 만료된 리소스의 경우 사용하지 않도록 함.
+* 상황에 맞춰 적절하게 적용해줘야 하며, 확실한 캐시 무효화를 적용하려면 Header에 아래와 같이 적용하면 됨.
+```
+Cache-Control: no-cache, no-store, must-revalidate
+Pragma: no-cache
+```
 <br>
 
 #### 참고
