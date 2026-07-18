@@ -1,0 +1,7 @@
+# IDE / editor settings
+.vscode/
+.idea/
+*.iml
+
+# macOS folder metadata
+.DS_Store
