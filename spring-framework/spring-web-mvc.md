@@ -5,9 +5,58 @@
 - 뷰(View): 응답으로 온 결과 화면을 만들어내는데 사용하는 영역.
 - 컨트롤러(Controller): 뷰와 모델의 중간에 위치하여 여러 요청을 처리하는 주체.
 - 동작원리
-  1. URL을 가지고 컨트롤러를 호출.
+  1. URL을 가지고 컨트롤러 호출.
   2. 컨트롤러에서 입력값 검증 후, 모델에 접근하여 필요한 데이터를 가져옴.
   3. 가져온 데이터를 가공하여 뷰에 노출시킴.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant View as View (Client)
+    participant Ctrl as Controller
+    participant Svc as Service
+    participant DAO as DAO
+    participant DB as DB
+
+    View->>Ctrl: HTTP Request (URL + Request DTO)
+    activate Ctrl
+    Ctrl->>Ctrl: Validation Check (Request DTO)
+
+    alt 검증 실패
+        Ctrl-->>View: 400 Bad Request (에러 응답 DTO)
+    else 검증 통과
+        Ctrl->>Svc: Request DTO 전달 (또는 VO/Entity로 변환 후 전달)
+        activate Svc
+        Svc->>Svc: Business Logic 수행
+
+        Svc->>DAO: Entity/VO 기반 CRUD 호출
+        activate DAO
+        DAO->>DB: SQL 실행 (Query/Insert/Update/Delete)
+
+        alt DB 처리 성공
+            activate DB
+            DB-->>DAO: ResultSet 반환
+            deactivate DB
+            DAO-->>Svc: Entity/VO 반환
+            Svc-->>Ctrl: 처리 결과 (Entity/VO)
+            Ctrl->>Ctrl: Response DTO로 변환
+            Ctrl-->>View: 200 OK (Response DTO, JSON)
+        else DB 에러 (제약조건 위반, 커넥션 실패 등)
+            activate DB
+            DB-->>DAO: SQLException
+            deactivate DB
+            DAO-->>Svc: DataAccessException (변환된 예외)
+            Svc-->>Ctrl: 예외 전파 (또는 트랜잭션 롤백 후 전파)
+            Ctrl->>Ctrl: 예외를 에러 응답 DTO로 변환
+            Ctrl-->>View: 500 Internal Server Error (에러 응답 DTO)
+        end
+        deactivate DAO
+        deactivate Svc
+    end
+    deactivate Ctrl
+
+    Note over Ctrl,DAO: DTO는 Controller-View 경계에서 요청/응답 변환용으로 사용<br/>Service~DAO~DB 구간은 Entity/VO 유지<br/>DAO는 Model과 독립된 영속성 계층으로 분리
+```
 
 <br>
 
