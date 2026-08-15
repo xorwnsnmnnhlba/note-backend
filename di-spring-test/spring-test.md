@@ -16,10 +16,16 @@
 - Spring Boot에서 테스트코드 작성을 위해 필요한 애노테이션으로써, @ExtendWith(SpringExtension.class)를 포함하고 있음
 - @SpringBootApplication이 붙어있는 스프링 메인 애플리케이션을 찾아간 후, 메인에서부터 시작하는 모든 빈들을 스캔함. 그 후 테스트용 애플리케이션 context를 만들면서 모든 빈을 등록해줌
 - 빈 설정 파일을 알아서 찾아줌(@SpringBootApplication)
+- webEnvironment 옵션을 통해 테스트 시 구동할 웹 환경을 지정할 수 있음
+	- MOCK(기본값): 실제 서버를 띄우지 않고 Mock 웹 환경을 구성함. MockMvc와 함께 사용함
+	- RANDOM_PORT: 임의의 Port로 실제 내장 WAS를 구동함. 실제 요청을 주고받는 통합 테스트 수행 시 사용함
+	- DEFINED_PORT: 설정해놓은 Port로 실제 내장 WAS를 구동함
 - 테스트코드 작성을 위해 build.gradle에 Test Scope로 spring-boot-starter-test 의존성을 추가해줘야 함
+	- Spring Boot 4.x부터는 테스트 대상 모듈에 맞춘 Test Starter를 함께 제공하므로, 필요에 따라 선택하여 추가할 수 있음(예: Spring MVC 테스트 시 spring-boot-starter-webmvc-test)
 ```
 dependencies { 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
 }
 ```
 
@@ -30,21 +36,29 @@ dependencies {
 	- 실제 객체와 비슷하게 동작하지만 프로그래머가 직접 그 객체의 행동을 관리하는 객체
 - Mockito
 	- Mock 객체를 생성/관리하고 검증할 수 있는 방법을 제공하는 클래스
-- @SpyBean
+- @MockitoSpyBean
 	- Spring Boot에서 테스트코드 작성 시, Repository Bean을 가져올 때 주로 사용하는 애노테이션
+	- 기존에 사용하던 @SpyBean이 Spring Boot 3.4부터 Deprecated 처리되었으며, Spring Boot 4.x에서 제거되고 Spring Framework가 제공하는 @MockitoSpyBean으로 대체됨
 - MockMvc
 	- 애플리케이션을 띄우지 않고 Spring MVC의 동작을 수행하여 테스트를 수행할 수 있는 인스턴스를 의미함
 	*	서버사이드 Spring MVC 테스트의 핵심 클래스로써, Spring MVC 테스트를 위한 메인 진입점이라 할 수 있음
 	- 컨트롤러 단의 테스트 시 자주 사용함
 	- @AutoConfigureMockMvc
 		- MockMvc 인스턴스 의존성 주입을 수행하기 위해 사용하는 애노테이션
-- @MockBean
+- @MockitoBean
 	- 테스트를 위한 Mock 빈 생성시에 사용하는 애노테이션으로써, ApplicationContext에 들어있는 동일타입 빈을 Mock 인스턴스로 교체함
 	- Mockito를 사용해서 Mock 인스턴스를 만들고 빈으로 등록해주며, 모든 테스트마다 자동으로 리셋됨
+	- 기존에 사용하던 @MockBean이 Spring Boot 3.4부터 Deprecated 처리되었으며, Spring Boot 4.x에서 제거되고 Spring Framework가 제공하는 @MockitoBean으로 대체됨
 - @WebMvcTest
 	- Spring MVC 테스트에 사용할 수 있는 어노테이션으로써, Spring MVC 컴포넌트에만 초점을 맞춤
 	- Spring MVC 테스트에 관련된 구성만 적용되므로, @SpringBootTest에 비해 상대적으로 빠르게 수행할 수 있음
 	- @AutoConfigureMockMvc 애노테이션을 포함하므로, MockMvc 인스턴스 의존성 주입을 자동으로 수행해줌
+- RestTestClient
+	- Spring Framework 7에서 추가된 테스트용 REST Client로써, 실제 구동된 서버에 요청을 보내고 응답을 검증할 수 있음
+	- @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)와 함께 사용하여 End-to-End에 가까운 통합 테스트를 수행할 수 있음
+	- @AutoConfigureRestTestClient
+		- RestTestClient 인스턴스 의존성 주입을 수행하기 위해 사용하는 애노테이션
+	- 기존의 TestRestTemplate, WebTestClient를 제거하고 대체하는 것이 아니라, 선택지를 추가한 것에 가까움
 - given
 	- org.mockito.BDDMockito에 위치한 정적 메서드로써, 테스트를 위한 조건을 줄 때 사용함
 - verify
@@ -99,3 +113,4 @@ public abstract class AbstractContainerBaseTest {
 - 통합 테스트에 대한 기본개념을 정리하면서 @SpringBootTest에 대한 동작원리를 익힐 수 있었다
 - 테스트 코드 작성 시 자주 사용하는 애노테이션들에 대해 정리하면서 하나하나 익힐 수 있었다. 익숙해질 때까지 반복해서 감을 잃지 않도록 해야겠다
 - 실제 운용이 이루어질 DB와의 테스트를 위해 사용하는 라이브러리인 Testcontainers에 대한 내용을 익힐 수 있었다
+- @MockBean, @SpyBean이 Spring Boot 4.x에서 제거되고 Spring Framework의 @MockitoBean, @MockitoSpyBean으로 대체되었음을 확인했다. 익숙하게 쓰던 애노테이션이라 하더라도 버전 변화를 계속 따라가야 한다는 것을 알게 되었다

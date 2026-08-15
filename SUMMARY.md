@@ -20,6 +20,7 @@
 - [Spring](/spring-framework/spring.md)
 - [Spring Boot](/spring-framework/spring-boot.md)
 - [Spring Web MVC](/spring-framework/spring-web-mvc.md)
+- [Actuator](/spring-framework/actuator.md)
 
 ## REST API
 

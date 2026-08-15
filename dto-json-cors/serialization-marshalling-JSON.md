@@ -38,7 +38,7 @@
 
 ### Jackson ObjectMapper
 - Java에서 인스턴스를 JSON 형태의 데이터로 변환(직렬화) 및 그 반대로 변환(역직렬화)할 수 있는 기능을 제공해주는 클래스
-- Spring Boot의 경우, 기본적으로 spring-boot-starter-web에서 DTO를 JSON 형식의 데이터로 자동 변환해주는 기능을 지원함
+- Spring Boot의 경우, 기본적으로 spring-boot-starter-webmvc에서 DTO를 JSON 형식의 데이터로 자동 변환해주는 기능을 지원함(Spring Boot 4.x 이전에는 spring-boot-starter-web)
 
 <br>
 

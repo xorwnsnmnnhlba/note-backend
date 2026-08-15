@@ -52,7 +52,7 @@
   - J2EE 표준스펙에 있는 기능으로써, 들어온 요청과 처리가 이루어진 응답을 걸러내는 역할을 수행함
   - Spring MVC의 핵심이라 할 수 있는 DispatcherServlet으로 요청을 전달하기 전에 부가적인 작업을 처리할 수 있는 기능 제공
   - Spring과 무관하게 웹 컨텍스트(Web Context)에서 동작함
-  - javax.servlet.Filter 인터페이스를 구현해야 하며, 아래와 같이 세가지 메서드를 가지고 있음
+  - jakarta.servlet.Filter 인터페이스를 구현해야 하며, 아래와 같이 세가지 메서드를 가지고 있음(Spring Boot 3.x부터 Jakarta EE로 이관되면서 javax.servlet에서 패키지명이 변경됨)
     - init(filterConfig): Filter 인스턴스를 초기화하고 서비스에 추가할 때 사용함
     - doFilter(request, response, chain): HTTP 요청이 DispatcherServlet에 전달되기 전, 웹 컨테이너에 의해 실행됨. 여기서 FilterChain을 이용하여 다음 대상으로 요청을 전달함
     - destroy(): Filter 인스턴스를 제거하고 해당하는 리소스를 반환할 때 사용함
