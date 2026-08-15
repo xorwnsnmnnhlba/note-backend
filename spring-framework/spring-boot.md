@@ -69,11 +69,11 @@ dependencies {
 <br>
 
 ### 자동 설정(Auto-configuration)
-- classpath에 어떤 라이브러리가 존재하는지, 어떤 빈이 이미 등록되어있는지, 어떤 속성이 설정되어있는지를 판단하여 필요한 빈을 자동으로 등록해주는 기능
+- classpath에 어떤 라이브러리가 존재하는지, 어떤 Bean이 이미 등록되어있는지, 어떤 속성이 설정되어있는지를 판단하여 필요한 Bean을 자동으로 등록해주는 기능
   - 조건이 충족될 때에만 설정이 적용되는 조건부 설정(Conditional Configuration) 방식으로 동작함
   - 예를 들어 spring-webmvc가 classpath에 존재하면 해당 애플리케이션을 웹 애플리케이션으로 간주하고, DispatcherServlet 등록과 같은 핵심 동작을 활성화함
   - 내장 Tomcat 구동 역시 자동 설정의 결과물이며, 위에 기재한 Tomcat 객체 생성부터 실행까지의 과정을 개발자 대신 수행해줌
-- 개발자가 직접 빈을 등록하거나 속성을 설정한 경우, 자동 설정보다 우선하여 적용됨
+- 개발자가 직접 Bean을 등록하거나 속성을 설정한 경우, 자동 설정보다 우선하여 적용됨
   - 즉 자동 설정은 기본값을 제공하는 역할이며, 필요한 부분만 선택적으로 재정의(Override)하여 사용할 수 있음
 - XML 설정이나 인프라 구성에 해당하는 상용구 코드(Boilerplate)를 제거하여, 비즈니스 로직 구현에 집중할 수 있게 해줌
 
@@ -83,12 +83,12 @@ dependencies {
 - Spring Boot 애플리케이션의 시작점이 되는 메인 클래스에 선언하는 애노테이션
 - 아래 3개의 애노테이션을 하나로 묶어놓은 편의성 애노테이션(Convenience Annotation)임
   - @Configuration
-    - 해당 클래스를 애플리케이션 컨텍스트에 등록할 빈 정의(Bean Definition)의 소스로 지정함
+    - 해당 클래스를 애플리케이션 컨텍스트에 등록할 Bean 정의(Bean Definition)의 소스로 지정함
   - @EnableAutoConfiguration
-    - classpath 설정, 이미 등록된 다른 빈, 여러 속성 설정을 기반으로 필요한 빈을 추가하도록 지시함
+    - classpath 설정, 이미 등록된 다른 Bean, 여러 속성 설정을 기반으로 필요한 Bean을 추가하도록 지시함
     - 예를 들어 spring-webmvc가 classpath에 있으면 해당 애플리케이션을 웹 애플리케이션으로 지정하고, DispatcherServlet 설정과 같은 핵심 동작을 활성화함
   - @ComponentScan
-    - 해당 클래스가 위치한 패키지(예: com/example) 및 그 하위에서 다른 컴포넌트, 설정, 서비스를 찾도록 지시함. 이를 통해 컨트롤러를 찾아 빈으로 등록할 수 있음
+    - 해당 클래스가 위치한 패키지(예: com/example) 및 그 하위에서 다른 컴포넌트, 설정, 서비스를 찾도록 지시함. 이를 통해 컨트롤러를 찾아 Bean으로 등록할 수 있음
     - 메인 클래스를 최상위 패키지에 두어야 하위 패키지 전체를 스캔할 수 있음
 ```
 package com.example.demo;
@@ -117,7 +117,7 @@ public class DemoApplication {
   - 애플리케이션 코드와 의존 라이브러리, 내장 WAS까지 하나의 JAR에 포함시키므로 별도의 WAS 설치 없이 독립 실행이 가능함
   - Gradle: `./gradlew build` 수행 후 `java -jar build/libs/{프로젝트명}-{버전}.jar`
   - Maven: `./mvnw package` 수행 후 `java -jar target/{프로젝트명}-{버전}.jar`
-- 실행 시 콘솔 로그를 통해 자동 설정으로 등록된 빈과 구동된 내장 Tomcat의 Port를 확인할 수 있음
+- 실행 시 콘솔 로그를 통해 자동 설정으로 등록된 Bean과 구동된 내장 Tomcat의 Port를 확인할 수 있음
 
 <br>
 

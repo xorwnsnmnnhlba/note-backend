@@ -7,15 +7,15 @@
 <br>
 
 ### @Autowired
-- 의존성 주입 시, 필요한 의존 객체의 타입에 해당하는 빈을 찾아 주입해주는 애노테이션
+- 의존성 주입 시, 필요한 의존 객체의 타입에 해당하는 Bean을 찾아 주입해주는 애노테이션
 	- required(기본값: true): 못 찾으면 애플리케이션 구동 실패
 
 <br>
 
 ### @SpringBootTest
 - Spring Boot에서 테스트코드 작성을 위해 필요한 애노테이션으로써, @ExtendWith(SpringExtension.class)를 포함하고 있음
-- @SpringBootApplication이 붙어있는 스프링 메인 애플리케이션을 찾아간 후, 메인에서부터 시작하는 모든 빈들을 스캔함. 그 후 테스트용 애플리케이션 context를 만들면서 모든 빈을 등록해줌
-- 빈 설정 파일을 알아서 찾아줌(@SpringBootApplication)
+- @SpringBootApplication이 붙어있는 스프링 메인 애플리케이션을 찾아간 후, 메인에서부터 시작하는 모든 Bean들을 스캔함. 그 후 테스트용 애플리케이션 context를 만들면서 모든 Bean을 등록해줌
+- Bean 설정 파일을 알아서 찾아줌(@SpringBootApplication)
 - webEnvironment 옵션을 통해 테스트 시 구동할 웹 환경을 지정할 수 있음
 	- MOCK(기본값): 실제 서버를 띄우지 않고 Mock 웹 환경을 구성함. MockMvc와 함께 사용함
 	- RANDOM_PORT: 임의의 Port로 실제 내장 WAS를 구동함. 실제 요청을 주고받는 통합 테스트 수행 시 사용함
@@ -46,8 +46,8 @@ dependencies {
 	- @AutoConfigureMockMvc
 		- MockMvc 인스턴스 의존성 주입을 수행하기 위해 사용하는 애노테이션
 - @MockitoBean
-	- 테스트를 위한 Mock 빈 생성시에 사용하는 애노테이션으로써, ApplicationContext에 들어있는 동일타입 빈을 Mock 인스턴스로 교체함
-	- Mockito를 사용해서 Mock 인스턴스를 만들고 빈으로 등록해주며, 모든 테스트마다 자동으로 리셋됨
+	- 테스트를 위한 Mock Bean 생성시에 사용하는 애노테이션으로써, ApplicationContext에 들어있는 동일타입 Bean을 Mock 인스턴스로 교체함
+	- Mockito를 사용해서 Mock 인스턴스를 만들고 Bean으로 등록해주며, 모든 테스트마다 자동으로 리셋됨
 	- 기존에 사용하던 @MockBean이 Spring Boot 3.4부터 Deprecated 처리되었으며, Spring Boot 4.x에서 제거되고 Spring Framework가 제공하는 @MockitoBean으로 대체됨
 - @WebMvcTest
 	- Spring MVC 테스트에 사용할 수 있는 어노테이션으로써, Spring MVC 컴포넌트에만 초점을 맞춤
