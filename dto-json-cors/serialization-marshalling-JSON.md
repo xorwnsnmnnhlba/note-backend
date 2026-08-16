@@ -36,18 +36,43 @@
 
 <br>
 
-### Jackson ObjectMapper
-- Java에서 인스턴스를 JSON 형태의 데이터로 변환(직렬화) 및 그 반대로 변환(역직렬화)할 수 있는 기능을 제공해주는 클래스
-- Spring Boot의 경우, 기본적으로 spring-boot-starter-webmvc에서 DTO를 JSON 형식의 데이터로 자동 변환해주는 기능을 지원함(Spring Boot 4.x 이전에는 spring-boot-starter-web)
+### Jackson
+- Java에서 인스턴스를 JSON 형태의 데이터로 변환(직렬화) 및 그 반대로 변환(역직렬화)할 수 있는 기능을 제공해주는 라이브러리
+- 변환 작업을 수행하는 클래스를 Mapper라 하며, Jackson Version에 따라 사용하는 클래스와 패키지가 다름
+  - Jackson 2: com.fasterxml.jackson.databind 패키지에 있는 ObjectMapper
+  - Jackson 3: tools.jackson.databind 패키지에 있는 JsonMapper
+- Spring Boot 4.x부터 Jackson 3가 기본으로 사용되며, 자동 설정을 통해 JsonMapper가 Bean으로 등록됨
+  - Jackson 2도 사용 가능하지만 Deprecated 처리되었으며, Jackson 3로의 이전을 돕기 위한 목적으로만 제공되므로 향후 4.x 버전에서 제거될 예정임
+  - 두 Version이 모두 존재하는 경우, spring.http.converters.preferred-json-mapper 속성으로 사용할 Version을 지정할 수 있음
+- Jackson은 spring-boot-starter-json에 포함되어 있으며, spring-boot-starter-webmvc를 추가하면 함께 따라오므로 별도 설정 없이 DTO를 JSON 형식의 데이터로 자동 변환해주는 기능을 사용할 수 있음(Spring Boot 4.x 이전에는 spring-boot-starter-web)
+
+<br>
+
+### HttpMessageConverter
+- 요청 본문(Request Body)을 Java 객체로, Java 객체를 응답 본문(Response Body)으로 변환해주는 인터페이스
+- @RequestBody와 @ResponseBody가 선언된 데이터의 변환을 담당하며, 요청의 Content-Type 헤더와 Accept 헤더를 보고 사용할 구현체를 결정함
+  - 컨트롤러에서 반환한 객체가 JSON 문자열로 바뀌어 응답 본문에 담기는 과정이 이 인터페이스의 구현체를 통해 이루어짐
+- 주요 구현체
+  - JacksonJsonHttpMessageConverter: Jackson을 이용하여 JSON을 변환함. Spring Framework 6 이전에는 MappingJackson2HttpMessageConverter가 그 역할을 수행함
+  - StringHttpMessageConverter: 문자열을 변환함
+  - ByteArrayHttpMessageConverter: 바이트 배열을 변환함
+  - FormHttpMessageConverter: 폼 데이터를 변환함
+  - JacksonXmlHttpMessageConverter: XML을 변환함
 
 <br>
 
 ### @JsonProperty
-- ObjectMapper를 이용하여 DTO를 JSON 데이터로 변환 시, 전달이 이루어지는 JSON 데이터 Key가 Dto의 필드와 다른 경우 사용하는 애노테이션
+- Mapper를 이용하여 DTO를 JSON 데이터로 변환 시, 전달이 이루어지는 JSON 데이터 Key가 Dto의 필드와 다른 경우 사용하는 애노테이션
 
 <br>
+
+#### 참고
+- Spring 공식문서 <Building a RESTful Web Service> - https://spring.io/guides/gs/rest-service
+- Spring Boot Reference Documentation <JSON> - https://docs.spring.io/spring-boot/reference/features/json.html
 
 #### 배워가는 것들
 - 백엔드 모듈을 구현할 때 데이터 흐름을 머릿속으로 잘 생각하며 구현하기 위해 필요한 개념들을 학습했다.
   - 메시지를 이용하여 백엔드와 프론트엔드 간 통신을 할 때 가장 많이 사용하는 포맷인 JSON에 대해 학습했다.
   - 데이터를 주고받을 때 사용하는 개념이라 할 수 있는 직렬화와 Marshalling에 대해 학습했다.
+- 컨트롤러가 반환한 객체가 JSON으로 바뀌는 과정을 HttpMessageConverter가 담당한다는 것을 익힐 수 있었다. 자동으로 이루어지는 변환이라 하더라도 그 주체가 무엇인지는 알고 있어야 할 것이다.
+- Jackson이 3으로 올라가면서 패키지와 Mapper 클래스가 바뀌었다는 것을 알게 되었다. 라이브러리의 Major Version 변경은 패키지 경로까지 바뀔 수 있으므로, 의존성 Version을 올릴 때 반드시 확인해야 한다.

@@ -78,6 +78,7 @@ sequenceDiagram
   - 컨트롤러를 구현하는 클래스에 사용하는 애노테이션
 - @RestController
   - @Controller에서 결과값으로 뷰를 만들지 않고 데이터 자체를 반환할 때 사용하는 애노테이션. JSON 형식으로 반환하여 많이 사용함
+  - @Controller와 @ResponseBody를 합쳐놓은 애노테이션으로써, 해당 클래스의 모든 메서드가 뷰 대신 도메인 객체를 반환하게 됨
 - @RequestBody
   - 요청 본문 내용을 받아서 메서드 변수로 보낼 때 사용하는 애노테이션
 - @ResponseBody
@@ -86,6 +87,13 @@ sequenceDiagram
 - @PathVariable
   - URI에 있는 템플릿 변수를 읽을 때 사용. 메서드 변수명 앞에 @PathVariable("템플릿_변수명")처럼 넣어서 사용 가능
   - 메서드 변수명과 템플릿 변수명이 서로 같은 경우, 템플릿 변수명 생략 가능함
+- @RequestParam
+  - URI의 쿼리 파라미터(Query Parameter)를 읽어서 메서드 변수로 바인딩할 때 사용하는 애노테이션
+  - 지정 가능한 속성
+    - name(또는 value): 매핑할 쿼리 파라미터명. 메서드 변수명과 서로 같은 경우 생략 가능함
+    - required(기본값: true): 해당 파라미터가 반드시 전달되어야 하는지에 대한 여부. 기본값 상태에서 전달되지 않으면 400 Bad Request로 응답 이루어짐
+    - defaultValue: 파라미터가 전달되지 않았을 때 사용할 기본값. 지정하는 경우 required는 자동으로 false가 됨
+  - @PathVariable이 URI 경로 자체에서 값을 읽는 것과 다르게, ? 뒤에 오는 쿼리 스트링에서 값을 읽음
 - @RequestMapping
   - 클라이언트를 통해 들어온 요청을 임의의 메서드와 매핑하기 위해 사용하는 애노테이션
   - Request 키워드 대신 앞부분에 HTTP 메서드를 넣어서 사용할 수 있음. @RequestMapping(method=RequestMethod.{METHOD_NAME})과 같은 의미를 가짐
@@ -99,6 +107,12 @@ sequenceDiagram
 - @ResponseStatus
   - 응답으로 온 HTTP 상태코드에 대한 처리를 진행하는 애노테이션. 예외처리 시, @ExceptionHandler와 함께 주로 사용함
 
+<br>
+
+#### 참고
+- Spring 공식문서 <Building a RESTful Web Service> - https://spring.io/guides/gs/rest-service
+
 #### 배워가는 것들
 - MVC 패턴에 대해 익힐 수 있었다. 들어온 요청을 어떻게 처리하여 보여주는지에 대한 전반적인 원리를 익힐 수 있었다.
 - Spring Web MVC에서 쓰이는 여러 애노테이션들의 용법을 익힐 수 있었다. 수없이 마주치게 될 애노테이션이기 때문에, 정확하게 알고 사용해야 할 것이다.
+- 요청에서 값을 읽어오는 애노테이션이 읽는 위치에 따라 나뉜다는 것을 정리할 수 있었다. 경로는 @PathVariable, 쿼리 스트링은 @RequestParam, 본문은 @RequestBody로 구분하여 사용해야 한다.
