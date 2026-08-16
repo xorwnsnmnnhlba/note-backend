@@ -96,6 +96,6 @@ public class Account {
 - https://learn.microsoft.com/ko-kr/azure/architecture/patterns/event-sourcing
 
 #### 배워가는 것들
-- 엔티티 간 관계 설정에 필요한 필수 개념들을 학습했다
-- 관계 설정 시 @OneToMany, @ManyToOne 등등을 사용할텐데, 애그리거트를 묶는 범위를 어떻게 잡아야 할 것인지를 잘 생각해야 할 것이다
-- 데이터 조회 시에 발생하는 N+1 problem을 어떻게 잡아낼 수 있을지에 대해 익힐 수 있었다
+- 엔티티 간 관계 설정에 필요한 필수 개념들을 학습했다.
+- 관계 설정 시 @OneToMany, @ManyToOne 등등을 사용할텐데, 애그리거트를 묶는 범위를 어떻게 잡아야 할 것인지를 잘 생각해야 할 것이다.
+- 데이터 조회 시에 발생하는 N+1 problem을 어떻게 잡아낼 수 있을지에 대해 익힐 수 있었다.

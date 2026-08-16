@@ -57,5 +57,5 @@ implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
 <br>
 
 #### 배워가는 것들
-- Backend Module과 Frontend Module을 분리하여 구축할 때 Backend 단에서 처리하는 로그인/로그아웃에 대한 프로세스를 익힐 수 있었다
-- 사실 기계적으로 Bcrypt를 사용했었는데, Argon2가 있다는 것도 새롭게 알게 되었다. 이에 대한 이론 학습과 병행하여 확실하게 나의 것으로 만들어서 단련하는 작업을 잘 진행하려 한다
+- Backend Module과 Frontend Module을 분리하여 구축할 때 Backend 단에서 처리하는 로그인/로그아웃에 대한 프로세스를 익힐 수 있었다.
+- 사실 기계적으로 Bcrypt를 사용했었는데, Argon2가 있다는 것도 새롭게 알게 되었다. 이에 대한 이론 학습과 병행하여 확실하게 나의 것으로 만들어서 단련하는 작업을 잘 진행하려 한다.

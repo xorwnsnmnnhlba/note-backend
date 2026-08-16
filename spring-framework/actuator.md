@@ -163,6 +163,6 @@ public class MyHealthIndicator implements HealthIndicator {
 - Spring Boot Reference Documentation <Endpoints> - https://docs.spring.io/spring-boot/reference/actuator/endpoints.html
 
 #### 배워가는 것들
-- 의존성 하나만 추가해도 애플리케이션의 상태를 확인할 수 있는 여러 Endpoint가 제공된다는 점을 익힐 수 있었다. 자동 설정이 주는 편의성을 체감할 수 있는 부분이었다
-- 노출과 접근이 서로 다른 개념이라는 것을 정리할 수 있었다. 노출되지 않은 Endpoint는 접근 설정과 무관하게 호출할 수 없으므로, 두 설정을 함께 확인해야 한다
-- 편리한 만큼 위험할 수 있다는 것을 알게 되었다. 내부 설정값이 그대로 드러나는 Endpoint들이 있기 때문에, 운영 환경에서는 무엇을 열어둘 것인지 반드시 따져보고 사용해야 할 것이다
+- 의존성 하나만 추가해도 애플리케이션의 상태를 확인할 수 있는 여러 Endpoint가 제공된다는 점을 익힐 수 있었다. 자동 설정이 주는 편의성을 체감할 수 있는 부분이었다.
+- 노출과 접근이 서로 다른 개념이라는 것을 정리할 수 있었다. 노출되지 않은 Endpoint는 접근 설정과 무관하게 호출할 수 없으므로, 두 설정을 함께 확인해야 한다.
+- 편리한 만큼 위험할 수 있다는 것을 알게 되었다. 내부 설정값이 그대로 드러나는 Endpoint들이 있기 때문에, 운영 환경에서는 무엇을 열어둘 것인지 반드시 따져보고 사용해야 할 것이다.
