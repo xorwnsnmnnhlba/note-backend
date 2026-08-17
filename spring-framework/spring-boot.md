@@ -121,6 +121,27 @@ public class DemoApplication {
 
 <br>
 
+### 애플리케이션 구동 직후 코드 실행
+- 애플리케이션 컨텍스트 구성이 끝난 직후에 특정 코드를 한 번 실행시켜야 할 때 사용하는 인터페이스
+  - 초기 데이터 적재, 외부 API 연동 확인, 배치성 작업 수행 등에 활용함
+- ApplicationRunner
+  - run(ApplicationArguments args) 메서드를 구현하며, 실행 인자를 ApplicationArguments 타입으로 전달받음
+  - 옵션 인자와 일반 인자를 구분하여 다룰 수 있으므로, 실행 인자를 해석해야 하는 경우에 유리함
+- CommandLineRunner
+  - run(String... args) 메서드를 구현하며, 실행 인자를 문자열 배열 그대로 전달받음
+- 두 인터페이스 모두 Bean으로 등록되어야 동작하며, @Component를 선언하거나 @Bean 메서드로 등록하여 사용함
+- 여러개를 등록한 경우, @Order 애노테이션이나 Ordered 인터페이스를 이용하여 실행 순서를 지정할 수 있음
+```
+@Bean
+public ApplicationRunner run(RestClient.Builder builder) {
+    return args -> {
+        // 애플리케이션 구동이 끝난 후 수행할 작업
+    };
+}
+```
+
+<br>
+
 #### 참고
 - Spring 공식문서 <Building an Application with Spring Boot> - https://spring.io/guides/gs/spring-boot
 
@@ -129,3 +150,4 @@ public class DemoApplication {
 - 여러 노트에서 습관적으로 추가하기만 했던 Starter 의존성이 어떤 역할을 하는지 정리할 수 있었다. Version 관리까지 대신 해준다는 점을 알게 되면서, 의존성 추가 시 무엇을 확인해야하는지 감을 잡을 수 있었다.
 - 자동 설정이 조건부로 동작하며 개발자의 설정이 우선한다는 원리를 익힐 수 있었다. 프레임워크가 알아서 해주는 영역이라 하더라도, 그 동작 원리를 알아야 문제가 생겼을 때 대응할 수 있을 것이다.
 - @SpringBootApplication이 3개의 애노테이션을 묶어놓은 것이라는 점을 정리하면서, 메인 클래스의 위치가 왜 중요한지(@ComponentScan의 스캔 범위)까지 함께 이해할 수 있었다.
+- 구동 직후에 코드를 실행시키는 방법으로 ApplicationRunner와 CommandLineRunner가 있다는 것을 익힐 수 있었다. 실행 인자를 어떤 형태로 받을 것인지에 따라 골라서 사용하면 될 것이다.

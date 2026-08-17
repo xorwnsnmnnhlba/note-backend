@@ -66,6 +66,23 @@
 
 <br>
 
+### @JsonIgnoreProperties
+- JSON 데이터를 객체로 변환(역직렬화) 시, 매핑 대상이 아닌 필드를 어떻게 처리할 것인지 지정하는 애노테이션
+- ignoreUnknown 속성을 true로 지정하면, 객체에 선언되지 않은 필드가 JSON에 포함되어 있어도 무시하고 변환을 수행함
+  - 지정하지 않은 상태에서 선언되지 않은 필드가 들어오는 경우, 변환에 실패하여 예외가 발생함
+- 외부 API를 호출하여 받은 응답을 객체로 변환할 때 특히 유용함
+  - 응답에는 사용하지 않는 필드가 함께 담겨오는 경우가 많으며, 필요한 필드만 선언하여 사용할 수 있음
+  - API 제공측에서 응답 필드를 추가하더라도 호출하는 쪽이 깨지지 않음
+```
+@JsonIgnoreProperties(ignoreUnknown = true)
+public record Quote(String type, Value value) {
+
+}
+```
+- 활용 사례는 [RestClient](/spring-framework/rest-client.md) 참고
+
+<br>
+
 #### 참고
 - Spring 공식문서 <Building a RESTful Web Service> - https://spring.io/guides/gs/rest-service
 - Spring Boot Reference Documentation <JSON> - https://docs.spring.io/spring-boot/reference/features/json.html

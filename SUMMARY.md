@@ -21,6 +21,7 @@
 - [Spring Boot](/spring-framework/spring-boot.md)
 - [Spring Web MVC](/spring-framework/spring-web-mvc.md)
 - [Actuator](/spring-framework/actuator.md)
+- [RestClient](/spring-framework/rest-client.md)
 
 ## REST API
 
