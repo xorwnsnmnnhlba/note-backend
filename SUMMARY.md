@@ -21,6 +21,7 @@
 - [Spring](/spring-framework/spring.md)
 - [Spring Boot](/spring-framework/spring-boot.md)
 - [Spring Web MVC](/spring-framework/spring-web-mvc.md)
+- [Validation과 예외처리](/spring-framework/validation.md)
 - [Actuator](/spring-framework/actuator.md)
 - [RestClient](/spring-framework/rest-client.md)
 

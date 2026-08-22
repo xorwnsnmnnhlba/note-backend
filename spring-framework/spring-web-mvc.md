@@ -104,6 +104,7 @@ sequenceDiagram
     - @DeleteMapping: DELETE 요청이 들어왔을 때 사용하는 애노테이션
 - @ExceptionHandler
   - Spring Web MVC에서 예외처리 시에 사용하는 애노테이션
+  - 검증 실패 시 발생하는 예외와 그에 대한 처리는 [Validation과 예외처리](/spring-framework/validation.md) 참고
 - @ResponseStatus
   - 응답으로 온 HTTP 상태코드에 대한 처리를 진행하는 애노테이션. 예외처리 시, @ExceptionHandler와 함께 주로 사용함
 
