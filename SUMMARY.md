@@ -14,6 +14,7 @@
 ## Java
 
 - [람다식과 함수형 인터페이스](/java/functional-interface.md)
+- [유틸리티 라이브러리](/java/utility-library.md)
 
 ## Spring Framework
 
