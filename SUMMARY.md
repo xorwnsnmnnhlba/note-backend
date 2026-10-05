@@ -66,6 +66,7 @@
 - [Spring Data JPA](/jpa/spring-data-jpa.md)
 - [트랜잭션 활용](/jpa/transaction.md)
 - [QueryDSL](/jpa/querydsl.md)
+- [엔티티 설계](/jpa/entity-design.md)
 
 ## DDD(Domain-Driven Design)
 
