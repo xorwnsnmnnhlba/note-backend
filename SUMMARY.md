@@ -22,6 +22,7 @@
 * [유틸리티 라이브러리](java/utility-library.md)
 * [가상 스레드와 동시성 제어](java/virtual-thread.md)
 * [최신 Java 문법](java/modern-java.md)
+* [Null 안전성(JSpecify)](java/null-safety.md)
 
 ## Spring Framework
 
