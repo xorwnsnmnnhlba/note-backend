@@ -113,6 +113,7 @@
 
 - [CQRS](cqrs/cqrs.md)
 - [Redis](cqrs/redis.md)
+- [이벤트와 메시징](cqrs/events-and-messaging.md)
 
 ## Infra
 
