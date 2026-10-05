@@ -31,6 +31,7 @@
 - [Spring Web MVC](spring-framework/spring-web-mvc.md)
 - [Validation과 예외처리](spring-framework/validation.md)
 - [Actuator](spring-framework/actuator.md)
+- [관측 가능성](spring-framework/observability.md)
 - [RestClient](spring-framework/rest-client.md)
 - [외부 설정](spring-framework/configuration-properties.md)
 - [스케줄링](spring-framework/scheduling.md)
