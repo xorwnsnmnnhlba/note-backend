@@ -36,6 +36,7 @@
 - [외부 설정](spring-framework/configuration-properties.md)
 - [스케줄링](spring-framework/scheduling.md)
 - [타임아웃과 재시도](spring-framework/resilience.md)
+- [캐싱](spring-framework/caching.md)
 
 ## REST API
 
