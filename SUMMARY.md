@@ -88,6 +88,7 @@
 * [DDD](domain-driven-design/ddd.md)
 * [Strategic Design](domain-driven-design/strategic-design.md)
 * [Tactical Design](domain-driven-design/tactical-design.md)
+* [Spring Modulith](domain-driven-design/spring-modulith.md)
 
 ## Hexagonal Architecture
 
