@@ -25,6 +25,7 @@
 - [Actuator](/spring-framework/actuator.md)
 - [RestClient](/spring-framework/rest-client.md)
 - [외부 설정](/spring-framework/configuration-properties.md)
+- [스케줄링](/spring-framework/scheduling.md)
 
 ## REST API
 
