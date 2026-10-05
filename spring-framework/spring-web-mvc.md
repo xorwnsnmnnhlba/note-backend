@@ -110,10 +110,63 @@ sequenceDiagram
 
 <br>
 
+### API 버전 관리
+- 이미 공개한 API의 응답 형식을 바꿔야 할 때, 기존 클라이언트가 깨지지 않도록 새 버전을 함께 제공하는 것
+- Spring Framework 7.0부터 API 버전 관리 기능이 Spring Web MVC와 WebFlux에 내장됨
+  - 이전에는 /v1/users처럼 경로를 따로 만들거나, 헤더 값을 직접 읽어 분기해야 했음
+- 버전을 전달하는 위치는 아래 방식 중에서 고름
+  - 요청 헤더: X-API-Version: 1.1
+  - 쿼리 파라미터: ?version=1.1
+  - 경로: /v1.1/users처럼 경로의 특정 위치
+  - 미디어 타입 파라미터: Accept: application/json;version=1.1
+- WebMvcConfigurer의 configureApiVersioning에서 버전을 읽을 위치, 기본 버전, 지원하는 버전을 설정함
+  - 버전은 기본적으로 major.minor.patch 형식으로 해석되며, minor와 patch를 생략하면 0으로 간주됨
+  - 버전이 없는 요청은 기본적으로 400(MissingApiVersionException)으로 응답하며, 기본 버전을 지정하면 그 버전으로 처리함
+  - 지원하지 않는 버전을 요청하면 400(InvalidApiVersionException)으로 응답함
+```
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void configureApiVersioning(ApiVersionConfigurer configurer) {
+        configurer.useRequestHeader("X-API-Version")
+                .setDefaultVersion("1.0")
+                .addSupportedVersions("1.0", "2.0");
+    }
+
+}
+```
+- 핸들러 메서드의 매핑 애노테이션에 version 속성으로 처리할 버전을 지정함
+  - "2.0+"처럼 +를 붙이면 2.0 이상의 모든 버전을 처리함. 새 버전에서 바뀌지 않은 API는 새로 만들 필요 없이 그대로 사용됨
+```
+@RestController
+@RequestMapping("/api/users")
+public class UserController {
+
+    @GetMapping(path = "/{id}", version = "1.0")
+    public UserResponseV1 getUserV1(@PathVariable Long id) {
+        ...
+    }
+
+    @GetMapping(path = "/{id}", version = "2.0+")
+    public UserResponseV2 getUser(@PathVariable Long id) {
+        ...
+    }
+
+}
+```
+- 더 이상 사용하지 않을 버전은 deprecateVersion으로 지정하며, 해당 버전으로 요청하면 응답 헤더로 폐기 예정임을 알림
+  - Deprecation(RFC 9745), Sunset(RFC 8594) 헤더와 이전 안내 문서 링크를 보냄
+- RestClient, WebClient, HTTP Service Client, MockMvc, RestTestClient에서도 요청에 버전을 넣는 기능을 지원함
+
+<br>
+
 #### 참고
 - Spring 공식문서 <Building a RESTful Web Service> - https://spring.io/guides/gs/rest-service
+- Spring Framework Reference Documentation <API Versioning> - https://docs.spring.io/spring-framework/reference/web/webmvc-versioning.html
 
 #### 배워가는 것들
 - MVC 패턴에 대해 익힐 수 있었다. 들어온 요청을 어떻게 처리하여 보여주는지에 대한 전반적인 원리를 익힐 수 있었다.
 - Spring Web MVC에서 쓰이는 여러 애노테이션들의 용법을 익힐 수 있었다. 수없이 마주치게 될 애노테이션이기 때문에, 정확하게 알고 사용해야 할 것이다.
 - 요청에서 값을 읽어오는 애노테이션이 읽는 위치에 따라 나뉜다는 것을 정리할 수 있었다. 경로는 @PathVariable, 쿼리 스트링은 @RequestParam, 본문은 @RequestBody로 구분하여 사용해야 한다.
+- API 버전 관리를 경로를 복사하거나 헤더를 직접 읽는 방식으로만 구현했는데, Spring Framework 7부터 version 속성 하나로 처리할 수 있다는 것을 알게 되었다. "2.0+"처럼 범위로 지정하면 바뀌지 않은 API를 버전마다 복사하지 않아도 된다.
