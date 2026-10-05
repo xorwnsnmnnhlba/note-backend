@@ -75,6 +75,61 @@ public record Value(Long id, String quote) {
 
 <br>
 
+### HTTP Service Client
+- 호출할 API를 Java 인터페이스로 선언하면, Spring이 그 인터페이스의 구현체(Proxy)를 만들어주는 선언형 방식
+  - 요청을 조립하는 코드를 직접 작성하지 않아도 되므로, 호출하는 쪽은 일반 메서드를 호출하듯 사용할 수 있음
+  - 실제 통신은 RestClient(또는 WebClient)가 수행하므로, 타임아웃, 메시지 변환 등의 설정이 그대로 적용됨
+- 인터페이스와 메서드에 아래 애노테이션을 선언함
+  - @HttpExchange: 인터페이스 공통 경로나 메서드 지정
+  - @GetExchange, @PostExchange, @PutExchange, @PatchExchange, @DeleteExchange: HTTP 메서드별 요청
+  - 매개변수에는 Controller와 같은 방식으로 @PathVariable, @RequestParam, @RequestBody, @RequestHeader를 사용함
+```
+@HttpExchange("/api")
+public interface QuoteClient {
+
+    @GetExchange("/random")
+    Quote getRandomQuote();
+
+    @GetExchange("/quotes/{id}")
+    Quote getQuote(@PathVariable Long id);
+
+    @PostExchange("/quotes")
+    Quote create(@RequestBody QuoteRequest request);
+
+}
+```
+- Spring Boot 4.x부터는 @ImportHttpServices로 인터페이스를 등록하면, Proxy 생성과 Bean 등록이 자동으로 이루어짐
+  - 이전에는 RestClientAdapter와 HttpServiceProxyFactory로 Proxy를 직접 만들어 Bean으로 등록해야 했음
+  - group으로 호출 대상 서버별 묶음을 나누고, spring.http.serviceclient.<group> 속성으로 묶음마다 기본 주소와 타임아웃을 지정함
+  - 같은 패키지의 인터페이스를 서로 다른 묶음에 넣으려면 types로 인터페이스를 직접 지정함
+```
+@SpringBootApplication
+@ImportHttpServices(group = "quote", types = QuoteClient.class)
+public class Application {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+
+}
+```
+```
+application.yml
+
+spring:
+  http:
+    serviceclient:
+      quote:
+        base-url: https://quote.example.com
+        connect-timeout: 2s
+        read-timeout: 3s
+```
+- 묶음마다 공통 헤더 등을 추가하려면 RestClientHttpServiceGroupConfigurer Bean을 등록하여 각 묶음의 RestClient.Builder를 설정함
+- 등록된 인터페이스는 일반 Bean처럼 생성자로 주입받아 사용함
+- Spring Framework 7의 API 버전 관리를 사용하는 경우, 요청에 버전 정보를 넣는 ApiVersionInserter를 RestClient와 HTTP Service Client에도 적용할 수 있음. 관련 내용은 [Spring Web MVC](/spring-framework/spring-web-mvc.md) 참고
+
+<br>
+
 ### RestClient, RestTemplate, WebClient 비교
 - RestClient
   - 동기 방식이며, Fluent API를 제공함
@@ -108,8 +163,10 @@ public record Value(Long id, String quote) {
 #### 참고
 - Spring 공식문서 <Consuming a RESTful Web Service> - https://spring.io/guides/gs/consuming-rest
 - Spring Framework Reference Documentation <REST Clients> - https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
+- Spring Boot Reference Documentation <Calling REST Services> - https://docs.spring.io/spring-boot/reference/io/rest-client.html
 
 #### 배워가는 것들
 - 지금까지 요청을 받는 쪽만 정리해왔는데, 요청을 보내는 쪽에도 별도의 도구가 있다는 것을 익힐 수 있었다. 마이크로서비스 간 통신이나 외부 연동을 구현할 때 반드시 필요한 부분이다.
 - 익숙하게 알고 있던 RestTemplate이 Spring Framework 7.0부터 Deprecated 처리되었다는 것을 알게 되었다. 오래된 자료를 보고 그대로 따라 구현하면 사라질 API를 쓰게 되므로, 클래스를 고르기 전에 현재 상태를 확인하는 습관을 들여야겠다.
+- HTTP Service Client를 사용하면 외부 API 호출도 인터페이스 선언만으로 끝낼 수 있다는 것을 알게 되었다. Spring Boot 4.x부터는 Proxy를 직접 만들 필요 없이 @ImportHttpServices와 설정 속성만으로 등록할 수 있다.
 - @JsonIgnoreProperties가 왜 필요한지 클라이언트 관점에서 이해할 수 있었다. 응답 스펙을 내가 통제할 수 없기 때문에, 필요한 필드만 받고 나머지는 무시하도록 해야 연동이 쉽게 깨지지 않는다.
