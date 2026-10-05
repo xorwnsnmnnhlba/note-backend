@@ -54,6 +54,7 @@
 
 - [Database](/database/database.md)
 - [JDBC](/database/jdbc.md)
+- [스키마 마이그레이션](/database/schema-migration.md)
 
 ## JPA
 
