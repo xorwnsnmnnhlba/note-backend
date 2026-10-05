@@ -64,6 +64,7 @@
 - [Value Type](/jpa/value-type.md)
 - [Relationship Mapping](/jpa/relationship-mapping.md)
 - [Spring Data JPA](/jpa/spring-data-jpa.md)
+- [트랜잭션 활용](/jpa/transaction.md)
 
 ## DDD(Domain-Driven Design)
 
