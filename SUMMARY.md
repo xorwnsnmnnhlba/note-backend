@@ -15,6 +15,7 @@
 
 - [람다식과 함수형 인터페이스](/java/functional-interface.md)
 - [유틸리티 라이브러리](/java/utility-library.md)
+- [가상 스레드와 동시성 제어](/java/virtual-thread.md)
 
 ## Spring Framework
 
