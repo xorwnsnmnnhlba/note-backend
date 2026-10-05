@@ -55,6 +55,7 @@
 - [Database](/database/database.md)
 - [JDBC](/database/jdbc.md)
 - [스키마 마이그레이션](/database/schema-migration.md)
+- [인덱스와 실행 계획](/database/index-and-query-plan.md)
 
 ## JPA
 
