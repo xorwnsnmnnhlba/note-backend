@@ -112,11 +112,68 @@ public class GlobalExceptionHandler {
 
 <br>
 
+### ProblemDetail
+- HTTP API의 오류 응답 형식을 정한 표준(RFC 9457, 이전 RFC 7807)을 구현한 클래스로써, Spring Framework 6.0부터 제공됨
+  - 오류 응답 DTO를 프로젝트마다 따로 만들지 않고, 표준 형식으로 통일할 수 있음
+  - Content-Type은 application/problem+json으로 응답됨
+- 주요 필드
+  - type: 오류 종류를 나타내는 URI. 지정하지 않으면 about:blank
+  - title: 오류 종류의 짧은 설명. 기본값은 상태 코드의 이름(Not Found 등)
+  - status: HTTP 상태 코드
+  - detail: 이번 오류에 대한 구체적인 설명
+  - instance: 오류가 발생한 요청 경로
+  - 그 외 필요한 값은 setProperty()로 추가할 수 있음
+```
+{
+  "type": "about:blank",
+  "title": "Not Found",
+  "status": 404,
+  "detail": "suite 3 not found",
+  "instance": "/api/suites/3"
+}
+```
+- spring.mvc.problemdetails.enabled=true로 지정하면, Spring MVC가 직접 처리하는 예외(검증 실패, 지원하지 않는 메서드 등)도 ProblemDetail 형식으로 응답함
+- @RestControllerAdvice의 @ExceptionHandler에서 ProblemDetail을 반환하면, 직접 만든 예외도 같은 형식으로 응답할 수 있음
+  - 응답 헤더를 함께 지정해야 할 때는 ResponseEntity<ProblemDetail>로 반환함
+```
+@RestControllerAdvice
+class ApiExceptionHandler {
+
+    @ExceptionHandler(NotFoundException.class)
+    ProblemDetail handleNotFound(NotFoundException ex) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
+
+    @ExceptionHandler(TooManyLoginAttemptsException.class)
+    ResponseEntity<ProblemDetail> handleTooManyLoginAttempts(TooManyLoginAttemptsException ex) {
+        return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
+                .header(HttpHeaders.RETRY_AFTER, String.valueOf(ex.retryAfter().toSeconds()))
+                .body(ProblemDetail.forStatusAndDetail(HttpStatus.TOO_MANY_REQUESTS, ex.getMessage()));
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    ProblemDetail handleDataIntegrityViolation(DataIntegrityViolationException ex) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, "conflicts with an existing item");
+    }
+
+}
+```
+- 예외와 상태 코드를 짝지을 때 고려할 점
+  - 이름 중복을 미리 검사해도, 동시에 등록하는 두 요청은 검사를 함께 통과할 수 있음. DB의 유니크 제약조건으로 막고, 그 위반(DataIntegrityViolationException)을 409 Conflict로 응답함
+  - DB 예외 메시지에는 테이블과 제약조건 이름이 들어있으므로, detail에 그대로 담지 않음
+  - 인증 실패처럼 사유를 구분하면 안 되는 경우에는 여러 예외를 같은 응답으로 처리함
+- 상태 코드의 의미는 [HTTP 상태코드](/http/http-status-code.md) 참고
+
+<br>
+
 #### 참고
 - Spring Framework Reference Documentation <Validation> - https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-validation.html
 - Spring Framework Reference Documentation <Java Bean Validation> - https://docs.spring.io/spring-framework/reference/core/validation/beanvalidation.html
+- Spring Framework Reference Documentation <Error Responses> - https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-ann-rest-exceptions.html
+- RFC 9457 <Problem Details for HTTP APIs> - https://www.rfc-editor.org/rfc/rfc9457
 
 #### 배워가는 것들
 - 검증에 실패했을 때 발생하는 예외가 하나가 아니라는 것을 알게 되었다. 제약조건을 어디에 선언했는지에 따라 달라지므로, 예외처리를 구성할 때 양쪽을 모두 다뤄야 한다.
 - Controller에 클래스 레벨 @Validated를 붙이면 오히려 500이 응답된다는 점이 인상적이었다. 오래된 자료를 그대로 따라 하면 입력값 오류를 서버 오류로 내보내게 되므로, 현재 Version의 동작을 확인하고 적용해야 한다.
 - Bean Validation은 Controller를 거치는 경로에서만 동작한다는 한계를 인지할 수 있었다. 반드시 지켜져야 하는 규칙이라면 애노테이션에만 의존하지 말고 도메인 객체에서도 함께 강제해야 할 것이다.
+- 오류 응답 형식을 직접 설계하지 않아도 ProblemDetail이라는 표준이 있다는 것을 알게 되었다. 형식이 통일되면 화면이나 다른 서비스가 오류를 한 가지 방식으로 처리할 수 있다.
