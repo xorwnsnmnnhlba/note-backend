@@ -52,6 +52,7 @@
 - [Dependency Injection](/di-spring-test/dependency-injection.md)
 - [Unit Test](/di-spring-test/unit-test.md)
 - [Spring Test](/di-spring-test/spring-test.md)
+- [외부 의존성을 격리한 테스트](/di-spring-test/test-isolation.md)
 - [TDD, BDD](/di-spring-test/tdd-bdd.md)
 
 ## Database
