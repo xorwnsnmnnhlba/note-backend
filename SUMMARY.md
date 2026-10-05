@@ -91,6 +91,7 @@
 - [Login & Logout, Sign-Up](/spring-security/login-logout-signup.md)
 - [JWT, Authority](/spring-security/jwt-authority.md)
 - [세션 토큰과 양방향 암호화](/spring-security/token-and-encryption.md)
+- [웹 취약점과 방어](/spring-security/web-vulnerability.md)
 
 ## File Upload
 
