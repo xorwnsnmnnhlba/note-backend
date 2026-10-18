@@ -95,7 +95,11 @@ services:
   - environment: 값을 Compose 파일에 직접 적음
   - env_file: 별도 파일에서 읽음. 비밀 값은 이 파일에 두고 .gitignore에 등록함
   - docker run -e로 비밀 값을 직접 넘기면 셸 히스토리에 남음
-  - env 파일의 값은 따옴표까지 값으로 인식되므로 따옴표를 쓰지 않음
+  - env 파일의 값 해석 규칙은 도구마다 다르므로 주의해야 함
+    - docker run --env-file: 따옴표까지 그대로 값으로 인식함
+    - Compose의 env_file과 .env: 따옴표 없는 값과 큰따옴표 값은 $이름을 변수로 치환함(pa$word → pa). 따옴표 없는 값에서는 공백 뒤의 #부터 주석으로 처리함
+    - Compose에서 $나 #이 들어간 비밀번호를 그대로 전달하려면 작은따옴표로 감싸야 함(PASSWORD='pa$word')
+    - 값이 의도대로 들어갔는지는 docker compose config로 확인할 수 있으나, 비밀 값이 화면에 출력되므로 주의함
 - restart(재시작 정책)
   - no: 재시작하지 않음(기본값)
   - on-failure: 비정상 종료 시에만 재시작함
@@ -140,12 +144,24 @@ volumes:
 
 <br>
 
+### 이미지 갱신
+- eclipse-temurin:25-jre처럼 버전 태그가 같아도, 보안 패치가 반영된 새 이미지가 같은 이름으로 다시 올라옴
+- docker compose up --build는 로컬에 이미 있는 베이스 이미지로 빌드하므로, 패치를 반영하려면 새로 받아야 함
+  - docker compose build --pull: 빌드할 때 베이스 이미지를 새로 받음
+  - docker compose pull --ignore-buildable: 빌드하지 않고 그대로 쓰는 이미지(DB, Proxy 등)만 새로 받음
+- 쓰지 않는 예전 이미지는 docker image prune으로 정리함
+- 업데이트 절차 전체는 [릴리스와 배포](/infra/release.md) 참고
+
+<br>
+
 #### 참고
 - Docker Docs <Multi-stage builds> - https://docs.docker.com/build/building/multi-stage/
 - Docker Docs <Compose file reference> - https://docs.docker.com/reference/compose-file/
 - Docker Docs <Configure logging drivers> - https://docs.docker.com/engine/logging/configure/
+- Docker Docs <Variable interpolation> - https://docs.docker.com/compose/how-tos/environment-variables/variable-interpolation/
 
 #### 배워가는 것들
 - 멀티 스테이지 빌드와 레이어 순서만 신경 써도 이미지 크기와 빌드 시간이 크게 달라진다는 것을 알게 되었다.
 - 컨테이너가 시작된 것과 애플리케이션이 준비된 것은 다르다는 점이 인상적이었다. healthcheck로 준비 상태를 판정해야 서비스 간 기동 순서가 의미를 가진다.
 - 포트 공개 범위, 재시작 정책, 로그 크기처럼 기본값을 그대로 두면 운영 중에 문제가 되는 설정들이 있다는 것을 배웠다. 기본값이 무엇인지 확인하고 명시적으로 지정하는 습관을 들여야겠다.
+- 같은 env 파일이라도 docker run과 Compose가 따옴표와 $를 다르게 해석한다는 것을 알게 되었다. 비밀번호처럼 특수 문자가 들어가는 값은 실제로 어떻게 전달되는지 확인해야 한다.
