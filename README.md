@@ -14,6 +14,7 @@
 - [HTTP 캐시와 조건부 요청](http/http-cache.md)
 - [HTTP Client](http/http-client.md)
 - [HTTP Server](http/http-server.md)
+- [HTTP 요청 전송의 세부 동작](http/request-transfer.md)
 - [Polling과 Webhook](http/polling-webhook.md)
 
 ## Java
