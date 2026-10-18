@@ -142,6 +142,37 @@ public ApplicationRunner run(RestClient.Builder builder) {
 
 <br>
 
+### 기동 순서와 초기화 시점 고르기
+- 기동 시 실행할 작업이 다른 작업보다 먼저 끝나야 한다면, 각 확장 지점이 언제 호출되는지 알아야 함
+- SpringApplication.run()의 주요 순서
+  1. Bean 생성과 의존성 주입. 각 Bean의 @PostConstruct가 호출됨
+  2. 모든 싱글턴 Bean 생성 완료 → SmartInitializingSingleton.afterSingletonsInstantiated() 호출
+  3. SmartLifecycle Bean 시작. 내장 웹 서버가 이 단계에서 요청을 받기 시작함
+  4. ContextRefreshedEvent 발행. @Scheduled 작업이 이 이벤트를 받아 등록되고 실행을 시작함
+  5. ApplicationStartedEvent 발행 → ApplicationRunner, CommandLineRunner 실행
+  6. ApplicationReadyEvent 발행
+- 따라서 ApplicationRunner나 ApplicationReadyEvent는 이미 웹 요청과 스케줄 작업이 시작된 뒤에 실행됨
+  - 예: 기동 시 "진행 중"으로 남은 이전 프로세스의 작업을 중단 처리하는 코드를 ApplicationReadyEvent에서 실행하면, 그보다 먼저 시작된 스케줄 작업이 방금 만든 작업까지 중단 처리할 수 있음
+- 요청과 스케줄보다 먼저 끝나야 하는 작업(이전 작업 정리, 저장된 데이터의 암호화 키 교체 등)은 SmartInitializingSingleton을 사용함
+  - 모든 Bean이 만들어진 뒤이므로 Repository, 트랜잭션 등 다른 Bean을 사용할 수 있음
+```
+@Component
+class StaleRunRecovery implements SmartInitializingSingleton {
+
+    @Override
+    public void afterSingletonsInstantiated() {
+        // 웹 요청·스케줄 시작 전에 이전 프로세스가 남긴 RUNNING 실행을 ABORTED로 정리
+    }
+
+}
+```
+- @PostConstruct를 쓰지 않는 이유
+  - 해당 Bean의 초기화 도중에 호출되므로, 다른 Bean이 모두 준비되었다는 보장이 없음
+  - 같은 Bean의 @Transactional 메서드를 호출해도 Proxy를 거치지 않아 트랜잭션이 적용되지 않음
+- 기동 시 작업이 실패하면 예외를 던져 기동 자체를 실패시키는 것이, 잘못된 상태로 요청을 받는 것보다 안전함
+
+<br>
+
 #### 참고
 - Spring 공식문서 <Building an Application with Spring Boot> - https://spring.io/guides/gs/spring-boot
 
@@ -151,3 +182,4 @@ public ApplicationRunner run(RestClient.Builder builder) {
 - 자동 설정이 조건부로 동작하며 개발자의 설정이 우선한다는 원리를 익힐 수 있었다. 프레임워크가 알아서 해주는 영역이라 하더라도, 그 동작 원리를 알아야 문제가 생겼을 때 대응할 수 있을 것이다.
 - @SpringBootApplication이 3개의 애노테이션을 묶어놓은 것이라는 점을 정리하면서, 메인 클래스의 위치가 왜 중요한지(@ComponentScan의 스캔 범위)까지 함께 이해할 수 있었다.
 - 구동 직후에 코드를 실행시키는 방법으로 ApplicationRunner와 CommandLineRunner가 있다는 것을 익힐 수 있었다. 실행 인자를 어떤 형태로 받을 것인지에 따라 골라서 사용하면 될 것이다.
+- ApplicationRunner는 웹 요청과 스케줄 작업이 이미 시작된 뒤에 실행된다는 점이 인상적이었다. 다른 작업보다 먼저 끝나야 하는 초기화라면 호출 시점을 확인하고 SmartInitializingSingleton 같은 더 이른 지점을 골라야 한다.
