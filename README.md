@@ -131,3 +131,4 @@
 - [Reverse Proxy와 HTTPS](infra/reverse-proxy.md)
 - [CI와 GitHub Actions](infra/ci.md)
 - [릴리스와 배포](infra/release.md)
+- [소프트웨어 공급망 보안](infra/supply-chain-security.md)
