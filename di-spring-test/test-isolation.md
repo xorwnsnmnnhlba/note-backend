@@ -216,12 +216,56 @@ public class TestSentinelApplication {
 
 <br>
 
+### 테스트 컨텍스트 캐시와 컨테이너 공유
+- Spring TestContext Framework는 한 번 만든 ApplicationContext를 캐시해두고, 설정이 같은 테스트 클래스끼리 재사용함
+  - 캐시 키는 설정 클래스, @Import, @MockitoBean, 활성 Profile, properties 등 컨텍스트 구성 전체임
+  - 테스트 클래스마다 @Import 조합이나 @MockitoBean이 다르면 각각 새 컨텍스트가 만들어짐
+  - 캐시 크기의 기본값은 32이며(spring.test.context.cache.maxSize), 넘으면 가장 오래 쓰지 않은 컨텍스트부터 닫음
+  - @DirtiesContext는 해당 컨텍스트를 캐시에서 제거하므로, 남용하면 테스트가 느려짐
+- 컨테이너를 @Bean으로 등록하면 컨텍스트마다 컨테이너가 하나씩 뜸
+  - 캐시된 컨텍스트 수만큼(최대 32개) 컨테이너가 동시에 떠 있게 되어, 새 컨테이너의 기동과 첫 접속이 느려지고 가끔 접속 시간 초과로 실패할 수 있음
+  - 다시 돌리면 통과하는 불안정한 테스트(Flaky Test)가 되어, 문제없는 PR까지 막을 수 있음
+- 컨테이너를 JVM에서 하나만 띄우는 방식(Singleton Container)
+  - static 필드에서 컨테이너를 한 번만 시작하고, 종료는 Testcontainers(Ryuk)가 JVM 종료 시 정리하도록 맡김
+  - 컨텍스트 사이의 데이터 격리가 필요하다면, 컨텍스트마다 같은 컨테이너 안에 새 데이터베이스를 만들어 연결함
+  - @ServiceConnection 대신 JdbcConnectionDetails Bean을 직접 등록하면 접속 정보를 원하는 데이터베이스로 지정할 수 있음
+```
+@TestConfiguration(proxyBeanMethods = false)
+public class TestcontainersConfiguration {
+
+    private static final PostgreSQLContainer POSTGRES = startPostgres();
+
+    private static final AtomicInteger DATABASES = new AtomicInteger();
+
+    private static PostgreSQLContainer startPostgres() {
+        PostgreSQLContainer container = new PostgreSQLContainer(DockerImageName.parse("postgres:18-alpine"))
+                .withCommand("postgres", "-c", "max_connections=300");
+        container.start();
+        return container;
+    }
+
+    @Bean
+    JdbcConnectionDetails jdbcConnectionDetails() {
+        String database = "context_" + DATABASES.incrementAndGet();
+        // 컨테이너에 접속하여 CREATE DATABASE 실행 후, 그 데이터베이스의 접속 정보를 반환
+        ...
+    }
+
+}
+```
+- 캐시된 컨텍스트마다 커넥션 풀을 열고 있으므로, 컨테이너 하나를 공유하면 DB의 최대 연결 수(PostgreSQL 기본 100)를 넘을 수 있음
+  - 컨텍스트 수 × 풀 크기를 고려하여 max_connections를 늘려야 함
+
+<br>
+
 #### 참고
 - Spring Boot Reference Documentation <Testcontainers> - https://docs.spring.io/spring-boot/reference/testing/testcontainers.html
 - WireMock Documentation <Stubbing> - https://wiremock.org/docs/stubbing/
 - Testcontainers for Java - https://java.testcontainers.org/
+- Spring Framework Reference Documentation <Context Caching> - https://docs.spring.io/spring-framework/reference/testing/testcontext-framework/ctx-management/caching.html
 
 #### 배워가는 것들
 - 시각과 대기를 주입받도록 만들어두면, 시간이 걸리는 시나리오도 기다리지 않고 테스트할 수 있다는 것을 알게 되었다. 테스트하기 쉬운 구조가 곧 의존성이 잘 드러나는 구조다.
 - Mock으로 호출을 하나하나 지정하는 것보다, 재사용할 수 있는 Fake 객체를 두는 편이 테스트의 의도를 더 잘 드러낸다는 점이 인상적이었다.
 - 외부 API는 WireMock으로, DB는 Testcontainers로 실제와 가까운 환경을 만들 수 있다는 것을 배웠다. 서비스 로직은 Fake로 빠르게, 통신과 쿼리는 실제에 가깝게 나눠서 검증하는 것이 좋겠다.
+- 테스트 컨텍스트가 설정 조합마다 캐시된다는 점 때문에, 컨텍스트마다 띄운 컨테이너가 수십 개까지 늘어날 수 있다는 것을 알게 되었다. 가끔 실패하는 테스트는 운이 아니라 자원 사용 구조부터 의심해봐야 한다.
