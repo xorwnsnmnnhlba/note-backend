@@ -97,6 +97,54 @@ jobs:
   - set -euo pipefail: 명령 실패(-e), 정의되지 않은 변수 사용(-u), 파이프 중간의 실패(pipefail) 시 즉시 중단함
   - shellcheck로 따옴표 누락 같은 흔한 실수를 정적 분석할 수 있으며, CI에서 함께 검사하면 좋음
   - 토큰 같은 비밀 값은 출력하지 않으며, CI의 Secrets 기능으로 주입함
+- GitHub Actions의 run 단계 기본 셸에 주의해야 함
+  - shell을 지정하지 않으면 Linux Runner에서는 bash -e로 실행되어 pipefail이 없음
+  - 예: 판정 스크립트 | tee summary.md처럼 결과를 요약에 남기면, 판정이 실패해도 마지막 명령(tee)이 성공하여 단계가 통과해버림
+  - shell: bash를 명시하면 bash --noprofile --norc -eo pipefail로 실행되므로, Job이나 Workflow의 defaults에 지정해두는 것이 안전함
+```
+defaults:
+  run:
+    shell: bash
+```
+- 실패해야 하는 상황에서 정말 실패하는지도 테스트해야 함. 통과만 확인해서는 "항상 통과하는 검사"를 발견할 수 없음
+
+<br>
+
+### 정기 실행(schedule)과 알림
+- on.schedule에 cron을 지정하면 정기적으로 Workflow를 실행할 수 있음(UTC 기준). 의존성 취약점 점검처럼 코드 변경이 없어도 결과가 바뀌는 작업에 사용함
+```
+on:
+  schedule:
+    - cron: "0 0 * * 1"    # 매주 월요일 00:00 UTC
+  workflow_dispatch:
+```
+- 정기 실행의 함정
+  - 실패 알림 메일은 cron을 마지막으로 수정한 사람에게만 가므로, 다른 사람은 실패를 모르고 지나칠 수 있음
+  - 공개 저장소는 60일 동안 활동이 없으면 GitHub가 정기 실행을 자동으로 멈춤
+- 실패를 사람에게 전달하는 방법
+  - 실패하면 gh issue create로 이슈를 열고(이미 열려 있으면 댓글), 다시 통과하면 이슈를 닫음
+  - 저장소를 지켜보는(Watch) 사람 모두에게 알림이 가고, 해결 여부가 이슈 상태로 남음
+  - Job에 permissions: issues: write를 부여해야 함
+  - 공개 저장소의 이슈에는 취약점 위치처럼 공격에 도움이 되는 내용은 적지 않음
+- 취약점 점검 관련 내용은 [소프트웨어 공급망 보안](/infra/supply-chain-security.md) 참고
+
+<br>
+
+### Docker 이미지 빌드 캐시
+- Runner는 매번 새로운 환경이므로, docker compose build로 이미지를 만들면 의존성 다운로드부터 다시 수행함
+  - 시간이 오래 걸리고, Maven Central이나 플러그인 저장소의 일시 장애에 그대로 노출됨
+- docker/build-push-action에 GitHub Actions 캐시(type=gha)를 지정하면 레이어 캐시를 실행 간에 재사용할 수 있음
+  - 빌드 파일(build.gradle, package-lock.json)이 그대로면 의존성 단계를 다시 실행하지 않음
+  - load: true로 Runner의 Docker에 이미지를 올려두면, 이후 docker compose up은 빌드 없이 그 이미지를 사용함
+```
+- uses: docker/build-push-action@<SHA> # v7.4.0
+  with:
+    context: api
+    load: true
+    tags: sentinel-e2e-api
+    cache-from: type=gha,scope=e2e-api
+    cache-to: type=gha,scope=e2e-api,mode=max
+```
 
 <br>
 
@@ -123,8 +171,11 @@ jobs:
 - GitHub Docs <Understanding GitHub Actions> - https://docs.github.com/en/actions/get-started/understand-github-actions
 - GitHub Docs <Workflow syntax for GitHub Actions> - https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax
 - ShellCheck - https://www.shellcheck.net/
+- GitHub Docs <Workflow syntax - defaults.run.shell> - https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#defaultsrunshell
+- Docker Docs <GitHub Actions cache> - https://docs.docker.com/build/cache/backends/gha/
 
 #### 배워가는 것들
 - CI는 결국 명령의 종료 코드를 보고 판단한다는 것을 이해하게 되었다. 어떤 검증이든 종료 코드로 결과를 돌려주면 파이프라인의 한 단계로 붙일 수 있다.
 - failure()와 always() 조건으로 실패했을 때의 리포트 보관과 뒷정리를 분리할 수 있다는 점이 유용했다. CI가 실패했을 때 원인을 바로 볼 수 있어야 고치는 시간이 줄어든다.
 - concurrency와 permissions처럼 짧은 설정 몇 줄로 불필요한 실행과 과도한 권한을 줄일 수 있다는 것을 알게 되었다.
+- 셸을 지정하지 않으면 pipefail이 빠져 판정이 실패해도 단계가 통과할 수 있다는 점이 인상적이었다. 검사는 통과하는 경우뿐 아니라 실패해야 하는 경우에도 실제로 실패하는지 확인해야 한다.
