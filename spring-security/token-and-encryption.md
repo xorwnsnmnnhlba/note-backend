@@ -61,6 +61,13 @@ static String hash(String token) {
 - 자동화(CI 등)에 사용하는 API 토큰은 로그인 세션과 분리함
   - 필요한 기능만 수행할 수 있도록 권한 범위를 좁힘
   - 만료 기한이 없는 토큰은 잊힌 채 계속 유효하므로, 발급 시 만료 기한을 반드시 지정하게 함
+- 남아 있는 자격증명 정리하기
+  - 비밀번호 재설정은 계정 복구에 해당하므로, 세션뿐 아니라 그 사용자가 발급한 API 토큰도 폐기함. 탈취된 계정을 되찾았는데 공격자가 만든 토큰이 남아 있으면 안 됨
+  - 초대를 다시 보냈다면, 수락 시 같은 이메일로 발급된 다른 초대 링크를 모두 무효화함. 예전 링크가 남아 있으면 계정 삭제 뒤 그 링크로 다시 가입할 수 있음
+  - 사용자를 삭제하면 그 사용자에게 보낸 대기 중인 초대도 함께 삭제함
+  - 관리자가 대기 중인 초대를 확인하고 취소할 수 있어야, 잘못 보낸 링크가 만료될 때까지 살아 있지 않음
+  - 만료된 세션과 링크 행은 정리 배치로 주기적으로 삭제함. 지우지 않으면 브라우저를 닫고 돌아오지 않은 세션의 해시가 계속 쌓임
+- 같은 링크를 동시에 사용하는 경합은 [동시 수정과 낙관적 잠금](/jpa/optimistic-locking.md) 참고
 
 <br>
 
@@ -69,11 +76,13 @@ static String hash(String token) {
 - 응답 문구뿐 아니라 응답 시간도 같아야 함
   - 없는 계정은 BCrypt 비교를 건너뛰어 응답이 훨씬 빠르므로, 시간 차이로 계정 존재 여부가 드러남(Timing Attack)
   - 없는 계정일 때도 더미 해시와 비교를 수행하여 응답 시간을 맞춤
+  - 더미 해시는 형식이 올바른 실제 BCrypt 해시여야 함. 길이나 형식이 틀린 문자열은 비교 연산 없이 즉시 실패하므로, 응답 시간 차이가 그대로 남음
+  - 기동 시 무작위 값으로 해시를 하나 만들어 사용하면 형식 실수를 피할 수 있음
 ```
 User user = users.findByEmail(email).orElse(null);
 if (user == null || !passwordEncoder.matches(password, user.getPasswordHash())) {
     if (user == null) {
-        passwordEncoder.matches(password, DUMMY_HASH);
+        passwordEncoder.matches(password, dummyHash);    // dummyHash = passwordEncoder.encode(무작위 값)
     }
     throw new InvalidCredentialsException();
 }
@@ -181,3 +190,4 @@ class SecretKeyRotation implements SmartInitializingSingleton {
 - 토큰과 비밀번호의 해시 방식이 다른 이유를 이해할 수 있었다. 값의 경우의 수가 충분히 크다면 느린 해시가 필요 없고, 사람이 만든 값이라면 반드시 느린 해시를 써야 한다.
 - 로그인 실패 응답은 문구뿐 아니라 응답 시간까지 같아야 한다는 점이 인상적이었다. 보안은 눈에 보이는 결과만이 아니라 부수적인 신호까지 고려해야 한다.
 - 양방향 암호화는 알고리즘보다 IV와 키를 어떻게 다루느냐가 더 중요하다는 것을 알게 되었다. 버전 접두어처럼 나중에 바꿀 것을 미리 대비해두는 습관도 들여야겠다.
+- 더미 해시처럼 보안을 위해 넣어둔 장치도 형식이 틀리면 조용히 효과가 사라진다는 것을 알게 되었다. 보안 장치는 "있는지"가 아니라 "동작하는지"를 테스트로 확인해야 한다.
