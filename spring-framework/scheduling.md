@@ -125,6 +125,22 @@ class SchedulingConfig implements SchedulingConfigurer {
 - 실행하기 전에 next_run_at을 먼저 다음 시각으로 갱신해야 함
   - 실행 도중 장애가 발생해도 같은 스케줄이 계속 반복 실행되지 않음
 - Quartz도 JDBC JobStore로 같은 기능을 제공하지만, 전용 테이블 여러 개와 스키마 관리가 필요하므로 요구사항이 단순하다면 직접 구현하는 편이 가벼울 수 있음
+- 한 번의 폴링에서 여러 스케줄을 순서대로 처리할 때는, 스케줄마다 처리하는 시점의 현재 시각을 다시 읽어야 함
+  - 폴링을 시작한 시각을 계속 쓰면, 앞의 작업이 오래 걸렸을 때 그사이 시작된 점검 시간을 놓치거나, 다음 실행 시각이 과거 기준으로 계산되어 곧바로 다시 실행됨
+- 사용자가 화면에서 스케줄을 바꾸는 동시에 스케줄러가 다음 실행 시각을 저장하면, 한쪽의 변경이 사라질 수 있음. 관련 내용은 [동시 수정과 낙관적 잠금](/jpa/optimistic-locking.md) 참고
+- 실행 도중 예상하지 못한 오류가 나면 "진행 중" 상태로 남지 않도록, 상태를 중단으로 바꾼 뒤 예외를 다시 던져야 함. 남아 있으면 재시작 전까지 집계나 정리 작업이 그 실행을 계속 건너뜀
+- 같은 오류가 주기마다 반복된다면 알림도 주기마다 반복되므로, 같은 대상·같은 오류는 일정 간격 안에서 한 번만 알리도록 억제함
+```
+private boolean shouldNotifyError(long scheduleId, String message, Instant now) {
+    SentError last = sentErrors.get(scheduleId);
+    if (last != null && Objects.equals(last.message(), message)
+            && now.isBefore(last.sentAt().plus(repeatInterval))) {
+        return false;
+    }
+    sentErrors.put(scheduleId, new SentError(message, now));
+    return true;
+}
+```
 - 여러 인스턴스에서 실행하는 경우의 주의사항
   - 모든 인스턴스가 같은 스케줄을 찾아 동시에 실행할 수 있음
   - SELECT ... FOR UPDATE SKIP LOCKED로 하나의 인스턴스만 행을 가져가도록 하거나, ShedLock 같은 라이브러리로 작업 단위 잠금을 걸어야 함
@@ -156,3 +172,4 @@ Instant now = clock.instant();
 - Spring의 cron은 초 필드가 있는 6자리라서 흔히 보던 5자리 cron과 다르다는 것을 알게 되었다. 두 형식이 섞이는 곳에서는 변환 규칙을 한곳에 모아둬야 한다.
 - 컨테이너의 기본 시간대가 UTC라서 cron이 9시간 어긋날 수 있다는 점이 인상적이었다. 시간대는 환경에 맡기지 말고 설정으로 명시해야겠다.
 - @Scheduled는 꺼져 있던 동안의 실행을 복구해주지 않는다는 것을 배웠다. 놓치면 안 되는 작업이라면 실행 시각과 처리 기록을 DB에 두고, 켜진 뒤에 확인하는 구조가 필요하다.
+- 긴 작업을 순서대로 처리하는 루프에서는 시작 시각 하나를 계속 쓰면 판단이 어긋난다는 것을 알게 되었다. 시각에 따라 판단하는 코드는 판단하는 그 순간의 시각을 써야 한다.
